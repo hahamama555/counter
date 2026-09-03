@@ -2,9 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,
-      maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 <title>47都道府県 指定ギフトカウンター</title>
 
@@ -18,96 +16,116 @@
 
 html,body{
   width:100%;
-  min-height:100%;
+  height:100%;
+  overflow:hidden;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Noto Sans JP",
     sans-serif;
-  background:#f3f4f8;
+  background:#f2f2f7;
   color:#222;
 }
 
 body{
-  padding:10px;
-}
-
-.app{
-  width:100%;
-  max-width:600px;
-  margin:0 auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 /* =========================
-   ヘッダー
+   9:16メイン画面
+========================= */
+
+.app{
+  width:100vw;
+  height:100vh;
+  max-width:1080px;
+  max-height:1920px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  overflow:hidden;
+}
+
+/* =========================
+   タイトル
 ========================= */
 
 .header{
-  background:linear-gradient(135deg,#6a35c7,#9a55e8);
-  color:white;
-  border-radius:18px;
-  padding:14px 12px;
+  flex:0 0 92px;
+  background:linear-gradient(135deg,#6633c7,#a451e8);
+  border-radius:22px;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
   box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
 
 .title{
-  font-size:24px;
+  font-size:34px;
   font-weight:900;
-  line-height:1.25;
+  line-height:1.15;
 }
 
 .subtitle{
-  font-size:13px;
-  margin-top:4px;
-  opacity:.9;
+  font-size:18px;
+  font-weight:700;
+  margin-top:5px;
 }
 
 /* =========================
-   ギフト設定
+   ギフト
 ========================= */
 
 .gift-box{
-  margin-top:9px;
-  background:white;
-  border-radius:15px;
-  padding:10px;
-  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  flex:0 0 62px;
+  background:#fff;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  box-shadow:0 3px 10px rgba(0,0,0,.07);
 }
 
 .gift-row{
+  width:100%;
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
 }
 
 .gift-label{
-  font-weight:800;
+  font-size:20px;
+  font-weight:900;
   white-space:nowrap;
 }
 
 .gift-input{
   flex:1;
   min-width:0;
+  height:44px;
   border:2px solid #ddd;
   border-radius:10px;
-  padding:8px 10px;
-  font-size:16px;
-  font-weight:700;
-}
-
-.btn{
-  border:none;
-  border-radius:10px;
-  padding:9px 12px;
+  padding:0 12px;
+  font-size:19px;
   font-weight:800;
-  font-size:14px;
-  cursor:pointer;
 }
 
 .save-btn{
-  background:#6a35c7;
+  height:44px;
+  padding:0 18px;
+  border:0;
+  border-radius:10px;
+  background:#6633c7;
   color:white;
+  font-size:17px;
+  font-weight:900;
 }
 
 /* =========================
@@ -115,36 +133,38 @@ body{
 ========================= */
 
 .status{
-  margin-top:9px;
+  flex:0 0 80px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:10px;
 }
 
 .status-card{
-  background:white;
-  border-radius:14px;
-  padding:9px;
-  text-align:center;
+  background:#fff;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
   box-shadow:0 3px 10px rgba(0,0,0,.07);
 }
 
 .status-label{
-  font-size:12px;
+  font-size:16px;
+  font-weight:800;
   color:#777;
-  font-weight:700;
 }
 
 .status-number{
-  font-size:27px;
-  line-height:1.1;
+  font-size:31px;
   font-weight:900;
-  color:#6a35c7;
+  color:#6633c7;
 }
 
 .status-small{
-  font-size:11px;
+  font-size:13px;
   color:#777;
+  font-weight:700;
 }
 
 /* =========================
@@ -152,81 +172,103 @@ body{
 ========================= */
 
 .progress-box{
-  margin-top:9px;
-  background:white;
-  border-radius:14px;
-  padding:10px 12px;
+  flex:0 0 60px;
+  background:#fff;
+  border-radius:16px;
+  padding:9px 15px;
   box-shadow:0 3px 10px rgba(0,0,0,.07);
 }
 
 .progress-top{
+  height:21px;
   display:flex;
   justify-content:space-between;
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:6px;
+  font-size:16px;
+  font-weight:900;
 }
 
 .progress{
-  height:12px;
+  height:14px;
   background:#e5e5eb;
   border-radius:20px;
   overflow:hidden;
+  margin-top:5px;
 }
 
 .progress-bar{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#6a35c7,#c45cff);
+  background:linear-gradient(90deg,#6633c7,#c65cff);
   transition:.25s;
 }
 
 /* =========================
-   都道府県
+   47都道府県
 ========================= */
 
 .prefectures{
-  margin-top:9px;
+  flex:1 1 auto;
+  min-height:0;
+
   display:grid;
+
+  /*
+    47県
+    3列 × 16行
+  */
   grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(16,minmax(0,1fr));
+
   gap:6px;
+
+  overflow:hidden;
 }
 
 .pref{
   position:relative;
-  background:white;
-  border-radius:11px;
-  min-height:65px;
-  padding:6px 4px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 2px 7px rgba(0,0,0,.08);
+
+  background:#fff;
   border:2px solid transparent;
-  transition:.15s;
+  border-radius:10px;
+
+  min-width:0;
+  min-height:0;
+
+  display:grid;
+
+  /*
+    県名
+    カウント
+    ボタン
+  */
+  grid-template-columns:1fr;
+  grid-template-rows:1fr 1fr 28px;
+
+  align-items:center;
+  justify-items:center;
+
+  box-shadow:0 2px 7px rgba(0,0,0,.07);
+
   user-select:none;
 }
 
-.pref:active{
-  transform:scale(.96);
-}
-
 .pref.completed{
-  border-color:#6a35c7;
-  background:#f5edff;
+  border-color:#6633c7;
+  background:#f6efff;
 }
 
 .pref-name{
-  font-size:14px;
+  font-size:17px;
   font-weight:900;
+  line-height:1;
+  white-space:nowrap;
 }
 
 .count{
-  font-size:21px;
+  font-size:23px;
+  line-height:1;
   font-weight:900;
-  color:#6a35c7;
-  line-height:1.05;
+  color:#6633c7;
 }
 
 .count.zero{
@@ -235,8 +277,8 @@ body{
 
 .mark{
   position:absolute;
-  top:2px;
   right:5px;
+  top:3px;
   font-size:18px;
   display:none;
 }
@@ -248,22 +290,22 @@ body{
 .buttons{
   display:flex;
   gap:4px;
-  margin-top:3px;
+  height:25px;
 }
 
 .plus,
 .minus{
-  width:29px;
-  height:24px;
-  border:none;
-  border-radius:7px;
+  width:38px;
+  height:25px;
+  border:0;
+  border-radius:6px;
   font-size:17px;
   font-weight:900;
   line-height:1;
 }
 
 .plus{
-  background:#6a35c7;
+  background:#6633c7;
   color:white;
 }
 
@@ -273,21 +315,20 @@ body{
 }
 
 /* =========================
-   下部ボタン
+   下部操作
 ========================= */
 
 .controls{
-  margin-top:10px;
+  flex:0 0 55px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:7px;
+  gap:8px;
 }
 
 .control-btn{
-  padding:12px 5px;
-  border:none;
-  border-radius:12px;
-  font-size:14px;
+  border:0;
+  border-radius:13px;
+  font-size:17px;
   font-weight:900;
 }
 
@@ -302,16 +343,22 @@ body{
 }
 
 /* =========================
-   設定パネル
+   タイトル設定
 ========================= */
 
 .panel{
   display:none;
-  margin-top:9px;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:90%;
+  max-width:600px;
   background:white;
-  border-radius:15px;
-  padding:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,.08);
+  border-radius:20px;
+  padding:20px;
+  z-index:1000;
+  box-shadow:0 10px 40px rgba(0,0,0,.3);
 }
 
 .panel.show{
@@ -319,26 +366,32 @@ body{
 }
 
 .panel-title{
+  font-size:21px;
   font-weight:900;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .panel input{
   width:100%;
+  height:48px;
   border:2px solid #ddd;
   border-radius:10px;
-  padding:9px;
-  font-size:16px;
+  padding:0 12px;
+  font-size:18px;
 }
 
 .panel-buttons{
   display:flex;
-  gap:6px;
-  margin-top:8px;
+  gap:8px;
+  margin-top:10px;
 }
 
 .panel-buttons button{
   flex:1;
+  height:45px;
+  border:0;
+  border-radius:10px;
+  font-weight:900;
 }
 
 /* =========================
@@ -349,8 +402,8 @@ body{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:999;
+  background:rgba(0,0,0,.68);
+  z-index:2000;
   align-items:center;
   justify-content:center;
   padding:20px;
@@ -361,13 +414,13 @@ body{
 }
 
 .complete-card{
-  width:100%;
-  max-width:420px;
-  background:white;
-  border-radius:25px;
-  padding:30px 20px;
+  width:90%;
+  max-width:600px;
+  background:#fff;
+  border-radius:28px;
+  padding:35px 20px;
   text-align:center;
-  animation:pop .35s ease;
+  animation:pop .3s ease;
 }
 
 .complete-icon{
@@ -375,31 +428,37 @@ body{
 }
 
 .complete-title{
-  font-size:30px;
+  font-size:38px;
   font-weight:900;
-  color:#6a35c7;
+  color:#6633c7;
 }
 
 .complete-text{
   margin-top:8px;
-  font-size:17px;
-  font-weight:700;
+  font-size:20px;
+  font-weight:800;
+}
+
+.complete-gift{
+  margin-top:12px;
+  font-size:25px;
+  font-weight:900;
 }
 
 .close-complete{
   margin-top:20px;
-  border:none;
+  padding:13px 35px;
+  border:0;
   border-radius:12px;
-  padding:12px 30px;
-  background:#6a35c7;
-  color:white;
+  background:#6633c7;
+  color:#fff;
+  font-size:18px;
   font-weight:900;
-  font-size:16px;
 }
 
 @keyframes pop{
   from{
-    transform:scale(.6);
+    transform:scale(.65);
     opacity:0;
   }
   to{
@@ -408,36 +467,202 @@ body{
   }
 }
 
+
 /* =========================
-   小さい画面
+   縦長スマホ
 ========================= */
 
-@media(max-width:380px){
+@media(max-width:600px){
 
-  body{
+  .app{
     padding:7px;
+    gap:5px;
+  }
+
+  .header{
+    flex-basis:58px;
+    border-radius:13px;
   }
 
   .title{
-    font-size:21px;
+    font-size:20px;
+  }
+
+  .subtitle{
+    font-size:11px;
+    margin-top:2px;
+  }
+
+  .gift-box{
+    flex-basis:39px;
+    border-radius:10px;
+    padding:4px 6px;
+  }
+
+  .gift-row{
+    gap:5px;
+  }
+
+  .gift-label{
+    font-size:12px;
+  }
+
+  .gift-input{
+    height:30px;
+    font-size:13px;
+    padding:0 7px;
+  }
+
+  .save-btn{
+    height:30px;
+    padding:0 9px;
+    font-size:12px;
+  }
+
+  .status{
+    flex-basis:48px;
+    gap:5px;
+  }
+
+  .status-card{
+    border-radius:10px;
+    gap:4px;
+  }
+
+  .status-label{
+    font-size:10px;
+  }
+
+  .status-number{
+    font-size:20px;
+  }
+
+  .status-small{
+    font-size:8px;
+  }
+
+  .progress-box{
+    flex-basis:39px;
+    border-radius:10px;
+    padding:5px 8px;
+  }
+
+  .progress-top{
+    height:12px;
+    font-size:10px;
+  }
+
+  .progress{
+    height:8px;
+    margin-top:3px;
+  }
+
+  .prefectures{
+    gap:3px;
   }
 
   .pref{
-    min-height:60px;
+    border-radius:6px;
+    border-width:1px;
+
+    grid-template-rows:
+      1fr
+      1fr
+      18px;
   }
 
   .pref-name{
-    font-size:13px;
+    font-size:10px;
   }
 
   .count{
-    font-size:19px;
+    font-size:14px;
+  }
+
+  .mark{
+    right:2px;
+    top:0;
+    font-size:11px;
+  }
+
+  .buttons{
+    height:17px;
+    gap:2px;
   }
 
   .plus,
   .minus{
-    width:26px;
-    height:22px;
+    width:25px;
+    height:17px;
+    border-radius:4px;
+    font-size:12px;
+  }
+
+  .controls{
+    flex-basis:36px;
+    gap:4px;
+  }
+
+  .control-btn{
+    border-radius:8px;
+    font-size:11px;
+  }
+
+}
+
+
+/* =========================
+   極小画面
+========================= */
+
+@media(max-width:380px){
+
+  .app{
+    padding:5px;
+    gap:3px;
+  }
+
+  .header{
+    flex-basis:50px;
+  }
+
+  .title{
+    font-size:17px;
+  }
+
+  .subtitle{
+    font-size:9px;
+  }
+
+  .gift-box{
+    flex-basis:34px;
+  }
+
+  .status{
+    flex-basis:43px;
+  }
+
+  .progress-box{
+    flex-basis:35px;
+  }
+
+  .pref-name{
+    font-size:9px;
+  }
+
+  .count{
+    font-size:12px;
+  }
+
+  .plus,
+  .minus{
+    width:22px;
+    height:15px;
+    font-size:11px;
+  }
+
+  .controls{
+    flex-basis:32px;
   }
 }
 </style>
@@ -447,17 +672,30 @@ body{
 
 <div class="app">
 
+  <!-- タイトル -->
   <div class="header">
-    <div class="title" id="title">🇯🇵 47都道府県 指定ギフトカウンター</div>
+
+    <div
+      class="title"
+      id="title">
+      🇯🇵 47都道府県 指定ギフトカウンター
+    </div>
+
     <div class="subtitle">
       指定ギフトが飛んだ都道府県をカウント！
     </div>
+
   </div>
 
+
+  <!-- ギフト -->
   <div class="gift-box">
 
     <div class="gift-row">
-      <div class="gift-label">🎁 ギフト</div>
+
+      <div class="gift-label">
+        🎁 ギフト
+      </div>
 
       <input
         id="giftInput"
@@ -467,58 +705,102 @@ body{
       >
 
       <button
-        class="btn save-btn"
+        class="save-btn"
         onclick="saveGift()">
         保存
       </button>
+
     </div>
 
   </div>
 
+
+  <!-- ステータス -->
   <div class="status">
 
     <div class="status-card">
-      <div class="status-label">全国カウント</div>
-      <div class="status-number" id="total">0</div>
-      <div class="status-small" id="giftName1">
+
+      <div class="status-label">
+        全国カウント
+      </div>
+
+      <div
+        class="status-number"
+        id="total">
+        0
+      </div>
+
+      <div
+        class="status-small"
+        id="giftName1">
         ハートミー
       </div>
+
     </div>
 
+
     <div class="status-card">
-      <div class="status-label">達成都道府県</div>
+
+      <div class="status-label">
+        達成
+      </div>
+
       <div class="status-number">
-        <span id="completed">0</span>
-        <span style="font-size:16px"> / 47</span>
+
+        <span id="completed">
+          0
+        </span>
+
+        <span style="font-size:12px">
+          /47
+        </span>
+
       </div>
+
       <div class="status-small">
-        都道府県コンプリート
+        都道府県
       </div>
+
     </div>
 
   </div>
 
+
+  <!-- 進捗 -->
   <div class="progress-box">
 
     <div class="progress-top">
-      <span>🇯🇵 全国制覇</span>
-      <span id="progressText">0 / 47</span>
+
+      <span>
+        🇯🇵 全国制覇
+      </span>
+
+      <span id="progressText">
+        0 / 47
+      </span>
+
     </div>
 
     <div class="progress">
+
       <div
         class="progress-bar"
         id="progressBar">
       </div>
+
     </div>
 
   </div>
 
+
+  <!-- 47都道府県 -->
   <div
     class="prefectures"
     id="prefectures">
   </div>
 
+
+  <!-- 操作 -->
   <div class="controls">
 
     <button
@@ -535,6 +817,8 @@ body{
 
   </div>
 
+
+  <!-- タイトル変更パネル -->
   <div
     class="panel"
     id="titlePanel">
@@ -552,13 +836,12 @@ body{
     <div class="panel-buttons">
 
       <button
-        class="btn save-btn"
+        style="background:#6633c7;color:white"
         onclick="saveTitle()">
         保存
       </button>
 
       <button
-        class="btn"
         style="background:#eee"
         onclick="toggleTitlePanel()">
         閉じる
@@ -571,8 +854,7 @@ body{
 </div>
 
 
-<!-- コンプリート画面 -->
-
+<!-- コンプリート -->
 <div
   class="complete"
   id="complete">
@@ -592,7 +874,7 @@ body{
     </div>
 
     <div
-      style="margin-top:12px;font-size:22px;font-weight:900"
+      class="complete-gift"
       id="completeGift">
       ハートミー
     </div>
@@ -610,9 +892,9 @@ body{
 
 <script>
 
-/* ===================================
+/* =========================
    47都道府県
-=================================== */
+========================= */
 
 const prefectureNames = [
 
@@ -676,77 +958,90 @@ const prefectureNames = [
 ];
 
 
-/* ===================================
+/* =========================
    データ
-=================================== */
+========================= */
 
-let counts = new Array(47).fill(0);
+let counts =
+  new Array(47).fill(0);
 
-let giftName = "ハートミー";
+let giftName =
+  "ハートミー";
 
 
-/* ===================================
-   画面作成
-=================================== */
+/* =========================
+   47マス生成
+========================= */
 
 function createPrefectures(){
 
   const container =
-    document.getElementById("prefectures");
+    document.getElementById(
+      "prefectures"
+    );
 
   container.innerHTML = "";
 
-  prefectureNames.forEach((name,index)=>{
+  prefectureNames.forEach(
+    (name,index)=>{
 
-    const div =
-      document.createElement("div");
+      const div =
+        document.createElement("div");
 
-    div.className = "pref";
+      div.className = "pref";
 
-    div.id = "pref-" + index;
+      div.id =
+        "pref-" + index;
 
-    div.innerHTML = `
+      div.innerHTML = `
 
-      <div class="mark">⭕</div>
+        <div class="mark">
+          ⭕
+        </div>
 
-      <div class="pref-name">
-        ${name}
-      </div>
+        <div class="pref-name">
+          ${name}
+        </div>
 
-      <div
-        class="count ${counts[index] === 0 ? "zero" : ""}"
-        id="count-${index}">
-        ${counts[index]}
-      </div>
+        <div
+          class="count ${
+            counts[index] === 0
+            ? "zero"
+            : ""
+          }"
+          id="count-${index}">
+          ${counts[index]}
+        </div>
 
-      <div class="buttons">
+        <div class="buttons">
 
-        <button
-          class="minus"
-          onclick="changeCount(${index},-1)">
-          −
-        </button>
+          <button
+            class="minus"
+            onclick="changeCount(${index},-1)">
+            −
+          </button>
 
-        <button
-          class="plus"
-          onclick="changeCount(${index},1)">
-          ＋
-        </button>
+          <button
+            class="plus"
+            onclick="changeCount(${index},1)">
+            ＋
+          </button>
 
-      </div>
+        </div>
 
-    `;
+      `;
 
-    container.appendChild(div);
+      container.appendChild(div);
 
-  });
+    }
+  );
 
 }
 
 
-/* ===================================
-   カウント変更
-=================================== */
+/* =========================
+   カウント
+========================= */
 
 function changeCount(index,value){
 
@@ -761,74 +1056,86 @@ function changeCount(index,value){
 }
 
 
-/* ===================================
+/* =========================
    更新
-=================================== */
+========================= */
 
 function update(){
 
   let total = 0;
   let completed = 0;
 
-  counts.forEach((num,index)=>{
+  counts.forEach(
+    (num,index)=>{
 
-    total += num;
+      total += num;
 
-    const countElement =
-      document.getElementById("count-" + index);
-
-    const prefElement =
-      document.getElementById("pref-" + index);
-
-    if(countElement){
-
-      countElement.textContent = num;
-
-      countElement.classList.toggle(
-        "zero",
-        num === 0
-      );
-
-    }
-
-    if(prefElement){
-
-      if(num > 0){
-
-        prefElement.classList.add(
-          "completed"
+      const countElement =
+        document.getElementById(
+          "count-" + index
         );
 
-        completed++;
+      const prefElement =
+        document.getElementById(
+          "pref-" + index
+        );
 
-      }else{
+      if(countElement){
 
-        prefElement.classList.remove(
-          "completed"
+        countElement.textContent =
+          num;
+
+        countElement.classList.toggle(
+          "zero",
+          num === 0
         );
 
       }
 
+      if(prefElement){
+
+        if(num > 0){
+
+          prefElement.classList.add(
+            "completed"
+          );
+
+          completed++;
+
+        }else{
+
+          prefElement.classList.remove(
+            "completed"
+          );
+
+        }
+
+      }
+
     }
-
-  });
-
-
-  document.getElementById("total")
-    .textContent = total;
-
-  document.getElementById("completed")
-    .textContent = completed;
-
-  document.getElementById("progressText")
-    .textContent = completed + " / 47";
+  );
 
 
-  const percent =
-    (completed / 47) * 100;
+  document.getElementById(
+    "total"
+  ).textContent = total;
 
-  document.getElementById("progressBar")
-    .style.width = percent + "%";
+
+  document.getElementById(
+    "completed"
+  ).textContent = completed;
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    completed + " / 47";
+
+
+  document.getElementById(
+    "progressBar"
+  ).style.width =
+    (completed / 47 * 100) + "%";
 
 
   if(completed === 47){
@@ -840,14 +1147,16 @@ function update(){
 }
 
 
-/* ===================================
-   ギフト名保存
-=================================== */
+/* =========================
+   ギフト名
+========================= */
 
 function saveGift(){
 
   const input =
-    document.getElementById("giftInput");
+    document.getElementById(
+      "giftInput"
+    );
 
   const value =
     input.value.trim();
@@ -858,16 +1167,17 @@ function saveGift(){
 
     document.getElementById(
       "giftName1"
-    ).textContent = giftName;
+    ).textContent =
+      giftName;
 
   }
 
 }
 
 
-/* ===================================
+/* =========================
    タイトル
-=================================== */
+========================= */
 
 function toggleTitlePanel(){
 
@@ -890,7 +1200,8 @@ function saveTitle(){
 
     document
       .getElementById("title")
-      .textContent = value;
+      .textContent =
+      value;
 
   }
 
@@ -899,36 +1210,42 @@ function saveTitle(){
 }
 
 
-/* ===================================
-   リセット
-=================================== */
+/* =========================
+   全リセット
+========================= */
 
 function resetAll(){
 
-  const ok =
-    confirm(
+  if(
+    !confirm(
       "47都道府県のカウントをすべて0にしますか？"
-    );
-
-  if(!ok) return;
+    )
+  ){
+    return;
+  }
 
   counts =
     new Array(47).fill(0);
+
+  document
+    .getElementById("complete")
+    .classList.remove("show");
 
   update();
 
 }
 
 
-/* ===================================
+/* =========================
    コンプリート
-=================================== */
+========================= */
 
 function showComplete(){
 
   document
     .getElementById("completeGift")
-    .textContent = giftName;
+    .textContent =
+    giftName;
 
   document
     .getElementById("complete")
@@ -946,13 +1263,14 @@ function closeComplete(){
 }
 
 
-/* ===================================
+/* =========================
    初期化
-=================================== */
+========================= */
 
 document
   .getElementById("giftInput")
-  .value = giftName;
+  .value =
+  giftName;
 
 createPrefectures();
 
