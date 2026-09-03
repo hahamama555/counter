@@ -2,11 +2,22 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no,
+viewport-fit=cover">
 
 <title>47都道府県 指定ギフトカウンター</title>
 
 <style>
+
+/* =========================
+   基本
+========================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -14,681 +25,1026 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans JP",
-    sans-serif;
-  background:#f2f2f7;
-  color:#222;
 }
 
 body{
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Noto Sans JP",
+  sans-serif;
+
+  background:#f1f1f6;
+  color:#222;
+
+  overscroll-behavior:none;
 }
 
+
 /* =========================
-   9:16メイン画面
+   メイン
 ========================= */
 
 .app{
-  width:100vw;
-  height:100vh;
+
+  width:100%;
+  height:100dvh;
+
   max-width:1080px;
-  max-height:1920px;
-  padding:18px;
+  margin:auto;
+
+  padding:
+  max(5px,env(safe-area-inset-top))
+  6px
+  max(5px,env(safe-area-inset-bottom))
+  6px;
+
   display:flex;
   flex-direction:column;
-  gap:10px;
+
+  gap:5px;
+
   overflow:hidden;
 }
 
+
 /* =========================
-   タイトル
+   ヘッダー
 ========================= */
 
 .header{
-  flex:0 0 92px;
-  background:linear-gradient(135deg,#6633c7,#a451e8);
-  border-radius:22px;
-  color:#fff;
+
+  flex:0 0 55px;
+
+  min-height:55px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #6532c6,
+    #a64ee8
+  );
+
+  color:white;
+
+  border-radius:13px;
+
   display:flex;
-  flex-direction:column;
-  justify-content:center;
   align-items:center;
-  text-align:center;
-  box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+  padding:5px 8px;
+
+  position:relative;
+
+  box-shadow:
+  0 3px 8px rgba(0,0,0,.12);
 }
+
+
+.header-text{
+
+  width:100%;
+
+  padding-right:42px;
+
+  text-align:center;
+}
+
 
 .title{
-  font-size:34px;
+
+  font-size:20px;
+  line-height:22px;
+
   font-weight:900;
-  line-height:1.15;
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
+
 .subtitle{
-  font-size:18px;
+
+  font-size:10px;
+  line-height:12px;
+
   font-weight:700;
-  margin-top:5px;
+
+  opacity:.9;
 }
+
+
+/* タイトル変更 */
+
+.title-edit{
+
+  position:absolute;
+
+  right:7px;
+  top:7px;
+
+  width:38px;
+  height:38px;
+
+  border:0;
+
+  border-radius:10px;
+
+  background:rgba(255,255,255,.2);
+
+  color:white;
+
+  font-size:20px;
+
+  font-weight:900;
+}
+
 
 /* =========================
    ギフト
 ========================= */
 
 .gift-box{
-  flex:0 0 62px;
-  background:#fff;
-  border-radius:16px;
+
+  flex:0 0 38px;
+
+  min-height:38px;
+
+  background:white;
+
+  border-radius:11px;
+
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:8px 14px;
-  box-shadow:0 3px 10px rgba(0,0,0,.07);
+
+  padding:4px 6px;
+
+  box-shadow:
+  0 2px 7px rgba(0,0,0,.06);
 }
+
 
 .gift-row{
+
   width:100%;
+
   display:flex;
   align-items:center;
-  gap:10px;
+
+  gap:5px;
 }
 
+
 .gift-label{
-  font-size:20px;
+
+  flex:0 0 auto;
+
+  font-size:13px;
+
   font-weight:900;
+
   white-space:nowrap;
 }
 
+
 .gift-input{
+
   flex:1;
+
   min-width:0;
-  height:44px;
-  border:2px solid #ddd;
-  border-radius:10px;
-  padding:0 12px;
-  font-size:19px;
+
+  height:30px;
+
+  border:
+  2px solid #ddd;
+
+  border-radius:9px;
+
+  padding:
+  0 8px;
+
+  font-size:14px;
+
   font-weight:800;
+
+  outline:none;
 }
 
+
 .save-btn{
-  height:44px;
-  padding:0 18px;
+
+  flex:0 0 58px;
+
+  height:30px;
+
   border:0;
-  border-radius:10px;
+
+  border-radius:9px;
+
   background:#6633c7;
+
   color:white;
-  font-size:17px;
+
+  font-size:13px;
+
   font-weight:900;
 }
+
 
 /* =========================
    ステータス
 ========================= */
 
 .status{
-  flex:0 0 80px;
+
+  flex:0 0 45px;
+
+  min-height:45px;
+
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:5px;
 }
+
 
 .status-card{
-  background:#fff;
-  border-radius:16px;
+
+  background:white;
+
+  border-radius:11px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  gap:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,.07);
+
+  gap:4px;
+
+  white-space:nowrap;
+
+  box-shadow:
+  0 2px 7px rgba(0,0,0,.06);
 }
 
+
 .status-label{
-  font-size:16px;
-  font-weight:800;
+
+  font-size:11px;
+
+  font-weight:900;
+
   color:#777;
 }
 
+
 .status-number{
-  font-size:31px;
+
+  font-size:24px;
+
+  line-height:1;
+
   font-weight:900;
+
   color:#6633c7;
 }
 
+
 .status-small{
-  font-size:13px;
-  color:#777;
+
+  font-size:9px;
+
   font-weight:700;
+
+  color:#777;
 }
+
 
 /* =========================
    進捗
 ========================= */
 
 .progress-box{
-  flex:0 0 60px;
-  background:#fff;
-  border-radius:16px;
-  padding:9px 15px;
-  box-shadow:0 3px 10px rgba(0,0,0,.07);
+
+  flex:0 0 38px;
+
+  min-height:38px;
+
+  background:white;
+
+  border-radius:11px;
+
+  padding:
+  5px 8px;
+
+  box-shadow:
+  0 2px 7px rgba(0,0,0,.06);
 }
 
+
 .progress-top{
-  height:21px;
+
+  height:12px;
+
   display:flex;
+
   justify-content:space-between;
-  font-size:16px;
+
+  align-items:center;
+
+  font-size:10px;
+
   font-weight:900;
 }
 
+
 .progress{
-  height:14px;
-  background:#e5e5eb;
+
+  width:100%;
+
+  height:8px;
+
+  margin-top:3px;
+
+  background:#e1e1e7;
+
   border-radius:20px;
+
   overflow:hidden;
-  margin-top:5px;
 }
 
+
 .progress-bar{
+
   height:100%;
+
   width:0%;
-  background:linear-gradient(90deg,#6633c7,#c65cff);
-  transition:.25s;
+
+  background:
+  linear-gradient(
+    90deg,
+    #6633c7,
+    #bd59ef
+  );
+
+  transition:.2s;
 }
+
 
 /* =========================
    47都道府県
+   4列×12行
 ========================= */
 
 .prefectures{
-  flex:1 1 auto;
+
+  flex:1 1 0;
+
   min-height:0;
 
   display:grid;
 
-  /*
-    47県
-    3列 × 16行
-  */
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:repeat(16,minmax(0,1fr));
+  grid-template-columns:
+  repeat(4,minmax(0,1fr));
 
-  gap:6px;
+  grid-template-rows:
+  repeat(12,minmax(0,1fr));
+
+  gap:3px;
 
   overflow:hidden;
 }
 
-.pref{
-  position:relative;
 
-  background:#fff;
-  border:2px solid transparent;
-  border-radius:10px;
+/* =========================
+   都道府県マス
+========================= */
+
+.pref{
 
   min-width:0;
   min-height:0;
 
-  display:grid;
+  position:relative;
 
-  /*
-    県名
-    カウント
-    ボタン
-  */
-  grid-template-columns:1fr;
-  grid-template-rows:1fr 1fr 28px;
+  background:white;
+
+  border:
+  1px solid transparent;
+
+  border-radius:7px;
+
+  display:flex;
+
+  flex-direction:column;
 
   align-items:center;
-  justify-items:center;
 
-  box-shadow:0 2px 7px rgba(0,0,0,.07);
+  justify-content:center;
 
-  user-select:none;
+  overflow:hidden;
+
+  box-shadow:
+  0 1px 5px rgba(0,0,0,.07);
 }
+
 
 .pref.completed{
+
+  background:#f5edff;
+
   border-color:#6633c7;
-  background:#f6efff;
 }
+
+
+/* =========================
+   県名
+========================= */
 
 .pref-name{
-  font-size:17px;
+
+  width:100%;
+
+  text-align:center;
+
+  font-size:12px;
+
+  line-height:14px;
+
   font-weight:900;
-  line-height:1;
+
   white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
 }
 
+
+/* =========================
+   カウント
+========================= */
+
 .count{
-  font-size:23px;
-  line-height:1;
+
+  height:17px;
+
+  line-height:17px;
+
+  font-size:15px;
+
   font-weight:900;
+
   color:#6633c7;
 }
 
+
 .count.zero{
+
   color:#aaa;
 }
 
+
+/* =========================
+   ⭕
+========================= */
+
 .mark{
+
   position:absolute;
-  right:5px;
-  top:3px;
-  font-size:18px;
+
+  right:2px;
+  top:1px;
+
+  font-size:10px;
+
   display:none;
 }
 
+
 .pref.completed .mark{
+
   display:block;
 }
 
+
+/* =========================
+   ボタン
+========================= */
+
 .buttons{
+
+  height:18px;
+
   display:flex;
-  gap:4px;
-  height:25px;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:3px;
 }
+
 
 .plus,
 .minus{
-  width:38px;
-  height:25px;
+
+  width:27px;
+
+  height:18px;
+
   border:0;
-  border-radius:6px;
-  font-size:17px;
+
+  border-radius:4px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:13px;
+
+  line-height:18px;
+
   font-weight:900;
-  line-height:1;
+
+  padding:0;
 }
 
+
 .plus{
+
   background:#6633c7;
+
   color:white;
 }
 
+
 .minus{
-  background:#e7e7ed;
+
+  background:#e4e4e9;
+
   color:#555;
 }
 
-/* =========================
-   下部操作
-========================= */
-
-.controls{
-  flex:0 0 55px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.control-btn{
-  border:0;
-  border-radius:13px;
-  font-size:17px;
-  font-weight:900;
-}
-
-.title-btn{
-  background:#222;
-  color:white;
-}
-
-.reset-btn{
-  background:#e53935;
-  color:white;
-}
 
 /* =========================
-   タイトル設定
+   タイトル変更モーダル
 ========================= */
 
-.panel{
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:5000;
+
+  background:
+  rgba(0,0,0,.55);
+
   display:none;
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:90%;
-  max-width:600px;
-  background:white;
-  border-radius:20px;
+
+  align-items:center;
+
+  justify-content:center;
+
   padding:20px;
-  z-index:1000;
-  box-shadow:0 10px 40px rgba(0,0,0,.3);
 }
 
-.panel.show{
-  display:block;
+
+.modal.show{
+
+  display:flex;
 }
 
-.panel-title{
-  font-size:21px;
+
+.modal-box{
+
+  width:100%;
+
+  max-width:500px;
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,.3);
+}
+
+
+.modal-title{
+
+  font-size:19px;
+
   font-weight:900;
+
   margin-bottom:10px;
 }
 
-.panel input{
+
+.title-input{
+
   width:100%;
-  height:48px;
-  border:2px solid #ddd;
+
+  height:45px;
+
+  border:
+  2px solid #ddd;
+
   border-radius:10px;
-  padding:0 12px;
-  font-size:18px;
+
+  padding:
+  0 10px;
+
+  font-size:16px;
+
+  font-weight:800;
+
+  outline:none;
 }
 
-.panel-buttons{
-  display:flex;
-  gap:8px;
+
+.modal-buttons{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:7px;
+
   margin-top:10px;
 }
 
-.panel-buttons button{
-  flex:1;
-  height:45px;
+
+.modal-buttons button{
+
+  height:42px;
+
   border:0;
+
   border-radius:10px;
+
+  font-size:15px;
+
   font-weight:900;
 }
+
+
+.modal-save{
+
+  background:#6633c7;
+
+  color:white;
+}
+
+
+.modal-close{
+
+  background:#e7e7eb;
+
+  color:#333;
+}
+
 
 /* =========================
    コンプリート
 ========================= */
 
 .complete{
-  display:none;
+
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,.68);
-  z-index:2000;
+
+  z-index:6000;
+
+  background:
+  rgba(0,0,0,.65);
+
+  display:none;
+
   align-items:center;
+
   justify-content:center;
+
   padding:20px;
 }
 
+
 .complete.show{
+
   display:flex;
 }
 
+
 .complete-card{
+
   width:90%;
-  max-width:600px;
-  background:#fff;
-  border-radius:28px;
-  padding:35px 20px;
+
+  max-width:500px;
+
+  background:white;
+
+  border-radius:25px;
+
+  padding:30px 15px;
+
   text-align:center;
-  animation:pop .3s ease;
 }
+
 
 .complete-icon{
-  font-size:65px;
+
+  font-size:55px;
 }
 
+
 .complete-title{
-  font-size:38px;
+
+  margin-top:5px;
+
+  font-size:32px;
+
   font-weight:900;
+
   color:#6633c7;
 }
 
+
 .complete-text{
-  margin-top:8px;
-  font-size:20px;
+
+  margin-top:6px;
+
+  font-size:16px;
+
   font-weight:800;
 }
 
+
 .complete-gift{
-  margin-top:12px;
-  font-size:25px;
+
+  margin-top:10px;
+
+  font-size:20px;
+
   font-weight:900;
 }
 
-.close-complete{
-  margin-top:20px;
-  padding:13px 35px;
+
+.complete-close{
+
+  margin-top:18px;
+
+  height:42px;
+
+  padding:0 30px;
+
   border:0;
-  border-radius:12px;
+
+  border-radius:10px;
+
   background:#6633c7;
-  color:#fff;
-  font-size:18px;
+
+  color:white;
+
+  font-size:15px;
+
   font-weight:900;
 }
 
-@keyframes pop{
-  from{
-    transform:scale(.65);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
 
 /* =========================
-   縦長スマホ
-========================= */
-
-@media(max-width:600px){
-
-  .app{
-    padding:7px;
-    gap:5px;
-  }
-
-  .header{
-    flex-basis:58px;
-    border-radius:13px;
-  }
-
-  .title{
-    font-size:20px;
-  }
-
-  .subtitle{
-    font-size:11px;
-    margin-top:2px;
-  }
-
-  .gift-box{
-    flex-basis:39px;
-    border-radius:10px;
-    padding:4px 6px;
-  }
-
-  .gift-row{
-    gap:5px;
-  }
-
-  .gift-label{
-    font-size:12px;
-  }
-
-  .gift-input{
-    height:30px;
-    font-size:13px;
-    padding:0 7px;
-  }
-
-  .save-btn{
-    height:30px;
-    padding:0 9px;
-    font-size:12px;
-  }
-
-  .status{
-    flex-basis:48px;
-    gap:5px;
-  }
-
-  .status-card{
-    border-radius:10px;
-    gap:4px;
-  }
-
-  .status-label{
-    font-size:10px;
-  }
-
-  .status-number{
-    font-size:20px;
-  }
-
-  .status-small{
-    font-size:8px;
-  }
-
-  .progress-box{
-    flex-basis:39px;
-    border-radius:10px;
-    padding:5px 8px;
-  }
-
-  .progress-top{
-    height:12px;
-    font-size:10px;
-  }
-
-  .progress{
-    height:8px;
-    margin-top:3px;
-  }
-
-  .prefectures{
-    gap:3px;
-  }
-
-  .pref{
-    border-radius:6px;
-    border-width:1px;
-
-    grid-template-rows:
-      1fr
-      1fr
-      18px;
-  }
-
-  .pref-name{
-    font-size:10px;
-  }
-
-  .count{
-    font-size:14px;
-  }
-
-  .mark{
-    right:2px;
-    top:0;
-    font-size:11px;
-  }
-
-  .buttons{
-    height:17px;
-    gap:2px;
-  }
-
-  .plus,
-  .minus{
-    width:25px;
-    height:17px;
-    border-radius:4px;
-    font-size:12px;
-  }
-
-  .controls{
-    flex-basis:36px;
-    gap:4px;
-  }
-
-  .control-btn{
-    border-radius:8px;
-    font-size:11px;
-  }
-
-}
-
-
-/* =========================
-   極小画面
+   小型スマホ
 ========================= */
 
 @media(max-width:380px){
 
   .app{
-    padding:5px;
+
+    padding:
+    max(3px,env(safe-area-inset-top))
+    4px
+    max(3px,env(safe-area-inset-bottom))
+    4px;
+
     gap:3px;
   }
 
+
   .header{
-    flex-basis:50px;
+
+    flex-basis:49px;
+    min-height:49px;
+
+    border-radius:10px;
   }
 
+
   .title{
+
+    font-size:17px;
+    line-height:19px;
+  }
+
+
+  .subtitle{
+
+    font-size:8px;
+    line-height:10px;
+  }
+
+
+  .title-edit{
+
+    width:34px;
+    height:34px;
+
+    right:5px;
+    top:5px;
+
     font-size:17px;
   }
 
-  .subtitle{
-    font-size:9px;
-  }
 
   .gift-box{
+
     flex-basis:34px;
+    min-height:34px;
   }
 
-  .status{
-    flex-basis:43px;
+
+  .gift-input,
+  .save-btn{
+
+    height:27px;
   }
 
-  .progress-box{
-    flex-basis:35px;
-  }
 
-  .pref-name{
-    font-size:9px;
-  }
+  .gift-label{
 
-  .count{
-    font-size:12px;
-  }
-
-  .plus,
-  .minus{
-    width:22px;
-    height:15px;
     font-size:11px;
   }
 
-  .controls{
-    flex-basis:32px;
+
+  .gift-input{
+
+    font-size:12px;
   }
+
+
+  .save-btn{
+
+    flex-basis:50px;
+
+    font-size:11px;
+  }
+
+
+  .status{
+
+    flex-basis:41px;
+    min-height:41px;
+  }
+
+
+  .status-label{
+
+    font-size:9px;
+  }
+
+
+  .status-number{
+
+    font-size:21px;
+  }
+
+
+  .status-small{
+
+    font-size:8px;
+  }
+
+
+  .progress-box{
+
+    flex-basis:34px;
+    min-height:34px;
+  }
+
+
+  .prefectures{
+
+    gap:2px;
+  }
+
+
+  .pref{
+
+    border-radius:5px;
+  }
+
+
+  .pref-name{
+
+    font-size:10px;
+    line-height:12px;
+  }
+
+
+  .count{
+
+    height:15px;
+
+    line-height:15px;
+
+    font-size:13px;
+  }
+
+
+  .buttons{
+
+    height:16px;
+  }
+
+
+  .plus,
+  .minus{
+
+    width:24px;
+    height:16px;
+
+    font-size:11px;
+  }
+
+
+  .mark{
+
+    font-size:9px;
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
 
 <div class="app">
 
-  <!-- タイトル -->
+
+  <!-- ======================
+       ヘッダー
+  ======================= -->
+
   <div class="header">
 
-    <div
-      class="title"
-      id="title">
-      🇯🇵 47都道府県 指定ギフトカウンター
+    <div class="header-text">
+
+      <div
+        class="title"
+        id="title">
+        🇯🇵 47都道府県 指定ギフトカウンター
+      </div>
+
+      <div class="subtitle">
+        指定ギフトが飛んだ都道府県をカウント！
+      </div>
+
     </div>
 
-    <div class="subtitle">
-      指定ギフトが飛んだ都道府県をカウント！
-    </div>
+
+    <!-- タイトル変更ボタン -->
+
+    <button
+      class="title-edit"
+      onclick="openTitleModal()">
+      ✏️
+    </button>
 
   </div>
 
 
-  <!-- ギフト -->
+  <!-- ======================
+       ギフト
+  ======================= -->
+
   <div class="gift-box">
 
     <div class="gift-row">
@@ -697,12 +1053,13 @@ body{
         🎁 ギフト
       </div>
 
+
       <input
         id="giftInput"
         class="gift-input"
         value="ハートミー"
-        maxlength="30"
-      >
+        maxlength="30">
+
 
       <button
         class="save-btn"
@@ -715,58 +1072,64 @@ body{
   </div>
 
 
-  <!-- ステータス -->
+  <!-- ======================
+       ステータス
+  ======================= -->
+
   <div class="status">
+
 
     <div class="status-card">
 
-      <div class="status-label">
+      <span class="status-label">
         全国カウント
-      </div>
+      </span>
 
-      <div
+      <span
         class="status-number"
         id="total">
         0
-      </div>
+      </span>
 
-      <div
+      <span
         class="status-small"
         id="giftName1">
         ハートミー
-      </div>
+      </span>
 
     </div>
 
 
     <div class="status-card">
 
-      <div class="status-label">
+      <span class="status-label">
         達成
-      </div>
+      </span>
 
-      <div class="status-number">
-
+      <span class="status-number">
         <span id="completed">
           0
         </span>
 
-        <span style="font-size:12px">
+        <span
+          style="font-size:11px">
           /47
         </span>
+      </span>
 
-      </div>
-
-      <div class="status-small">
+      <span class="status-small">
         都道府県
-      </div>
+      </span>
 
     </div>
 
   </div>
 
 
-  <!-- 進捗 -->
+  <!-- ======================
+       進捗
+  ======================= -->
+
   <div class="progress-box">
 
     <div class="progress-top">
@@ -781,6 +1144,7 @@ body{
 
     </div>
 
+
     <div class="progress">
 
       <div
@@ -793,57 +1157,54 @@ body{
   </div>
 
 
-  <!-- 47都道府県 -->
+  <!-- ======================
+       47都道府県
+  ======================= -->
+
   <div
     class="prefectures"
     id="prefectures">
   </div>
 
 
-  <!-- 操作 -->
-  <div class="controls">
-
-    <button
-      class="control-btn title-btn"
-      onclick="toggleTitlePanel()">
-      ✏️ タイトル変更
-    </button>
-
-    <button
-      class="control-btn reset-btn"
-      onclick="resetAll()">
-      🔄 全リセット
-    </button>
-
-  </div>
+</div>
 
 
-  <!-- タイトル変更パネル -->
-  <div
-    class="panel"
-    id="titlePanel">
+<!-- =========================
+     タイトル変更
+========================= -->
 
-    <div class="panel-title">
+<div
+  class="modal"
+  id="titleModal">
+
+
+  <div class="modal-box">
+
+    <div class="modal-title">
       ✏️ タイトルを変更
     </div>
 
+
     <input
       id="titleInput"
+      class="title-input"
       value="🇯🇵 47都道府県 指定ギフトカウンター"
-      maxlength="50"
-    >
+      maxlength="60">
 
-    <div class="panel-buttons">
+
+    <div class="modal-buttons">
 
       <button
-        style="background:#6633c7;color:white"
+        class="modal-save"
         onclick="saveTitle()">
         保存
       </button>
 
+
       <button
-        style="background:#eee"
-        onclick="toggleTitlePanel()">
+        class="modal-close"
+        onclick="closeTitleModal()">
         閉じる
       </button>
 
@@ -854,10 +1215,14 @@ body{
 </div>
 
 
-<!-- コンプリート -->
+<!-- =========================
+     コンプリート
+========================= -->
+
 <div
   class="complete"
   id="complete">
+
 
   <div class="complete-card">
 
@@ -865,13 +1230,16 @@ body{
       🎉🇯🇵🎉
     </div>
 
+
     <div class="complete-title">
       全国制覇！
     </div>
 
+
     <div class="complete-text">
       47都道府県すべて達成しました！
     </div>
+
 
     <div
       class="complete-gift"
@@ -879,8 +1247,9 @@ body{
       ハートミー
     </div>
 
+
     <button
-      class="close-complete"
+      class="complete-close"
       onclick="closeComplete()">
       閉じる
     </button>
@@ -891,6 +1260,7 @@ body{
 
 
 <script>
+
 
 /* =========================
    47都道府県
@@ -970,7 +1340,7 @@ let giftName =
 
 
 /* =========================
-   47マス生成
+   都道府県作成
 ========================= */
 
 function createPrefectures(){
@@ -980,50 +1350,65 @@ function createPrefectures(){
       "prefectures"
     );
 
+
   container.innerHTML = "";
+
 
   prefectureNames.forEach(
     (name,index)=>{
 
-      const div =
-        document.createElement("div");
 
-      div.className = "pref";
+      const pref =
+        document.createElement(
+          "div"
+        );
 
-      div.id =
+
+      pref.className =
+        "pref";
+
+
+      pref.id =
         "pref-" + index;
 
-      div.innerHTML = `
+
+      pref.innerHTML = `
 
         <div class="mark">
           ⭕
         </div>
 
+
         <div class="pref-name">
           ${name}
         </div>
 
+
         <div
-          class="count ${
-            counts[index] === 0
-            ? "zero"
-            : ""
-          }"
+          class="count zero"
           id="count-${index}">
-          ${counts[index]}
+          0
         </div>
+
 
         <div class="buttons">
 
           <button
             class="minus"
-            onclick="changeCount(${index},-1)">
+            onclick="
+            changeCount(${index},-1);
+            event.stopPropagation();
+            ">
             −
           </button>
 
+
           <button
             class="plus"
-            onclick="changeCount(${index},1)">
+            onclick="
+            changeCount(${index},1);
+            event.stopPropagation();
+            ">
             ＋
           </button>
 
@@ -1031,25 +1416,44 @@ function createPrefectures(){
 
       `;
 
-      container.appendChild(div);
+
+      container.appendChild(pref);
 
     }
   );
+
+
+  /*
+    48マスになるので
+    最後に空マスを1つ追加
+  */
+
+  const empty =
+    document.createElement("div");
+
+  empty.style.visibility =
+    "hidden";
+
+  container.appendChild(empty);
 
 }
 
 
 /* =========================
-   カウント
+   カウント変更
 ========================= */
 
 function changeCount(index,value){
 
   counts[index] += value;
 
+
   if(counts[index] < 0){
+
     counts[index] = 0;
+
   }
+
 
   update();
 
@@ -1057,33 +1461,40 @@ function changeCount(index,value){
 
 
 /* =========================
-   更新
+   画面更新
 ========================= */
 
 function update(){
 
   let total = 0;
+
   let completed = 0;
+
 
   counts.forEach(
     (num,index)=>{
 
+
       total += num;
+
 
       const countElement =
         document.getElementById(
           "count-" + index
         );
 
+
       const prefElement =
         document.getElementById(
           "pref-" + index
         );
 
+
       if(countElement){
 
         countElement.textContent =
           num;
+
 
         countElement.classList.toggle(
           "zero",
@@ -1091,6 +1502,7 @@ function update(){
         );
 
       }
+
 
       if(prefElement){
 
@@ -1118,12 +1530,14 @@ function update(){
 
   document.getElementById(
     "total"
-  ).textContent = total;
+  ).textContent =
+    total;
 
 
   document.getElementById(
     "completed"
-  ).textContent = completed;
+  ).textContent =
+    completed;
 
 
   document.getElementById(
@@ -1148,7 +1562,7 @@ function update(){
 
 
 /* =========================
-   ギフト名
+   ギフト変更
 ========================= */
 
 function saveGift(){
@@ -1158,12 +1572,16 @@ function saveGift(){
       "giftInput"
     );
 
+
   const value =
     input.value.trim();
 
+
   if(value){
 
-    giftName = value;
+    giftName =
+      value;
+
 
     document.getElementById(
       "giftName1"
@@ -1176,62 +1594,80 @@ function saveGift(){
 
 
 /* =========================
-   タイトル
+   タイトル変更
 ========================= */
 
-function toggleTitlePanel(){
+function openTitleModal(){
+
+  const modal =
+    document.getElementById(
+      "titleModal"
+    );
+
+
+  const input =
+    document.getElementById(
+      "titleInput"
+    );
+
+
+  input.value =
+    document.getElementById(
+      "title"
+    ).textContent;
+
+
+  modal.classList.add(
+    "show"
+  );
+
+
+  setTimeout(
+    ()=>{
+      input.focus();
+    },
+    100
+  );
+
+}
+
+
+function closeTitleModal(){
 
   document
-    .getElementById("titlePanel")
-    .classList.toggle("show");
+    .getElementById(
+      "titleModal"
+    )
+    .classList.remove(
+      "show"
+    );
 
 }
 
 
 function saveTitle(){
 
+  const input =
+    document.getElementById(
+      "titleInput"
+    );
+
+
   const value =
-    document
-      .getElementById("titleInput")
-      .value
-      .trim();
+    input.value.trim();
+
 
   if(value){
 
-    document
-      .getElementById("title")
-      .textContent =
+    document.getElementById(
+      "title"
+    ).textContent =
       value;
 
   }
 
-  toggleTitlePanel();
 
-}
-
-
-/* =========================
-   全リセット
-========================= */
-
-function resetAll(){
-
-  if(
-    !confirm(
-      "47都道府県のカウントをすべて0にしますか？"
-    )
-  ){
-    return;
-  }
-
-  counts =
-    new Array(47).fill(0);
-
-  document
-    .getElementById("complete")
-    .classList.remove("show");
-
-  update();
+  closeTitleModal();
 
 }
 
@@ -1242,23 +1678,28 @@ function resetAll(){
 
 function showComplete(){
 
-  document
-    .getElementById("completeGift")
-    .textContent =
+  document.getElementById(
+    "completeGift"
+  ).textContent =
     giftName;
 
-  document
-    .getElementById("complete")
-    .classList.add("show");
+
+  document.getElementById(
+    "complete"
+  ).classList.add(
+    "show"
+  );
 
 }
 
 
 function closeComplete(){
 
-  document
-    .getElementById("complete")
-    .classList.remove("show");
+  document.getElementById(
+    "complete"
+  ).classList.remove(
+    "show"
+  );
 
 }
 
@@ -1267,14 +1708,17 @@ function closeComplete(){
    初期化
 ========================= */
 
-document
-  .getElementById("giftInput")
-  .value =
+document.getElementById(
+  "giftInput"
+).value =
   giftName;
+
 
 createPrefectures();
 
+
 update();
+
 
 </script>
 
