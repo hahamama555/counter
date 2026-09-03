@@ -2,13 +2,11 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport"
       content="width=device-width,
       initial-scale=1.0,
       maximum-scale=1.0,
-      user-scalable=no,
-      viewport-fit=cover">
+      user-scalable=no">
 
 <title>47都道府県カウンター</title>
 
@@ -20,141 +18,104 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
   width:100%;
   height:100%;
   overflow:hidden;
 }
 
 body{
-  background:#f1f2f6;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Noto Sans JP",
     sans-serif;
+  background:#eef2f8;
   color:#222;
 }
-
-
-/* =========================
-   全体
-========================= */
 
 .app{
   width:100%;
   height:100dvh;
-
-  padding:
-    max(4px,env(safe-area-inset-top))
-    5px
-    max(4px,env(safe-area-inset-bottom))
-    5px;
-
+  padding:5px;
   display:flex;
   flex-direction:column;
-
-  gap:4px;
-
+  gap:5px;
   overflow:hidden;
 }
-
 
 /* =========================
    タイトル
 ========================= */
 
 .header{
-  flex:0 0 48px;
-
-  position:relative;
-
-  background:#333;
-
-  color:#fff;
-
-  border-radius:12px;
-
+  flex:0 0 58px;
+  border-radius:16px;
+  background:
+    linear-gradient(135deg,#ff4d6d,#ff7043);
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
 
+.header-inner{
+  width:100%;
   text-align:center;
+  padding:0 50px;
 }
 
 .title{
-  max-width:calc(100% - 60px);
-
-  font-size:19px;
-  line-height:21px;
-
+  font-size:20px;
   font-weight:900;
-
+  line-height:22px;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
 .subtitle{
-  font-size:8px;
-  line-height:10px;
-
-  margin-top:1px;
-
-  opacity:.9;
-
+  font-size:9px;
   font-weight:700;
+  margin-top:2px;
 }
 
 .edit-title{
   position:absolute;
-
-  right:5px;
-  top:5px;
-
-  width:36px;
-  height:36px;
-
+  right:7px;
+  top:7px;
+  width:42px;
+  height:42px;
   border:0;
-  border-radius:9px;
-
-  background:#555;
-
-  color:#fff;
-
-  font-size:16px;
+  border-radius:12px;
+  background:rgba(255,255,255,.22);
+  color:white;
+  font-size:20px;
 }
-
 
 /* =========================
    ギフト
 ========================= */
 
 .gift-box{
-  flex:0 0 34px;
-
-  background:#fff;
-
-  border-radius:10px;
-
-  display:flex;
-  align-items:center;
-
-  padding:3px 6px;
+  flex:0 0 40px;
+  background:white;
+  border-radius:13px;
+  padding:4px 6px;
+  box-shadow:0 2px 7px rgba(0,0,0,.06);
 }
 
 .gift-row{
-  width:100%;
-
+  height:100%;
   display:flex;
   align-items:center;
-
-  gap:5px;
+  gap:6px;
 }
 
 .gift-label{
-  font-size:10px;
+  font-size:12px;
   font-weight:900;
   white-space:nowrap;
 }
@@ -162,172 +123,184 @@ body{
 .gift-input{
   flex:1;
   min-width:0;
-
-  height:27px;
-
+  height:31px;
   border:2px solid #ddd;
-  border-radius:8px;
-
-  padding:0 7px;
-
-  font-size:12px;
+  border-radius:10px;
+  padding:0 9px;
+  font-size:13px;
   font-weight:800;
-
   outline:none;
 }
 
+.gift-input:focus{
+  border-color:#ff5367;
+}
+
 .gift-save{
-  width:50px;
-  height:27px;
-
+  width:57px;
+  height:31px;
   border:0;
-  border-radius:8px;
+  border-radius:10px;
+  background:#ff5367;
+  color:white;
+  font-size:12px;
+  font-weight:900;
+}
 
-  background:#333;
-  color:#fff;
+/* =========================
+   全国カウント
+========================= */
 
+.status{
+  flex:0 0 43px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+}
+
+.status-card{
+  background:white;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  box-shadow:0 2px 7px rgba(0,0,0,.06);
+}
+
+.status-label{
+  color:#777;
   font-size:10px;
   font-weight:900;
 }
 
-
-/* =========================
-   ステータス
-========================= */
-
-.status{
-  flex:0 0 38px;
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:4px;
-}
-
-.status-card{
-  background:#fff;
-
-  border-radius:10px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  gap:3px;
-}
-
-.status-label{
-  font-size:9px;
-  color:#777;
-  font-weight:900;
-}
-
 .status-number{
-  font-size:20px;
+  color:#f13c4e;
+  font-size:23px;
   line-height:1;
-
-  color:#e53935;
-
   font-weight:900;
 }
 
 .status-small{
-  font-size:7px;
   color:#777;
+  font-size:8px;
   font-weight:700;
 }
 
-
 /* =========================
-   進捗
+   全国制覇
 ========================= */
 
 .progress-box{
-  flex:0 0 31px;
-
-  background:#fff;
-
-  border-radius:10px;
-
-  padding:3px 8px;
+  flex:0 0 39px;
+  background:white;
+  border-radius:13px;
+  padding:5px 9px;
+  box-shadow:0 2px 7px rgba(0,0,0,.06);
 }
 
 .progress-top{
-  height:10px;
-
+  height:11px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-
-  font-size:8px;
-
+  align-items:center;
+  font-size:9px;
   font-weight:900;
 }
 
 .progress{
-  height:7px;
-
-  margin-top:2px;
-
-  background:#e2e2e7;
-
+  height:8px;
+  margin-top:4px;
+  background:#e3e6ed;
   border-radius:20px;
-
   overflow:hidden;
 }
 
 .progress-bar{
   width:0%;
   height:100%;
-
-  background:#e53935;
-
-  transition:.2s;
+  border-radius:20px;
+  background:
+    linear-gradient(
+      90deg,
+      #ff4058,
+      #ff8848,
+      #ffc247
+    );
+  transition:.25s;
 }
-
 
 /* =========================
    日本地図エリア
 ========================= */
 
 .map{
-  position:relative;
-
   flex:1;
   min-height:0;
-
-  width:100%;
-
   overflow:hidden;
 
-  border-radius:12px;
+  border-radius:18px;
 
   background:
     radial-gradient(
-      circle at center,
+      ellipse at center,
       #ffffff 0%,
-      #f7f7fa 60%,
-      #eeeeF3 100%
+      #f7f9fd 60%,
+      #e9eef6 100%
     );
+
+  padding:5px;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.04);
 }
 
+/*
+  実際の日本地図に近い配置用グリッド
+
+  12列 × 12行
+
+  北海道
+      ↓
+  東北
+      ↓
+  関東・中部
+      ↓
+  関西・中国・四国
+      ↓
+  九州
+      ↓
+  沖縄
+*/
+
+.map-grid{
+  width:100%;
+  height:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(12,minmax(0,1fr));
+
+  grid-template-rows:
+    repeat(12,minmax(0,1fr));
+
+  gap:3px;
+}
 
 /* =========================
    県カード
 ========================= */
 
 .pref{
-  position:absolute;
+  min-width:0;
+  min-height:0;
 
-  width:14.1%;
-  height:6.9%;
+  border-radius:8px;
 
-  background:#fff;
+  border:2px solid rgba(255,255,255,.9);
 
-  border:1px solid #d9d9df;
-
-  border-radius:6px;
+  position:relative;
 
   display:flex;
   flex-direction:column;
@@ -335,30 +308,124 @@ body{
   align-items:center;
   justify-content:center;
 
+  overflow:hidden;
+
   box-shadow:
-    0 1px 3px rgba(0,0,0,.08);
+    0 2px 4px rgba(30,50,80,.12);
 
   transition:.15s;
-
-  overflow:hidden;
 }
 
-.pref.completed{
-  background:#ffd2d2;
+.pref:active{
+  transform:scale(.94);
+}
 
-  border-color:#e53935;
+/* 地方カラー */
+
+.hokkaido{
+  background:#bfe9ff;
+}
+
+.tohoku{
+  background:#bff0cf;
+}
+
+.kanto{
+  background:#ffd3ad;
+}
+
+.hokuriku{
+  background:#d7ccff;
+}
+
+.chubu{
+  background:#fff0a8;
+}
+
+.kansai{
+  background:#ffc6dc;
+}
+
+.chugoku{
+  background:#bceee4;
+}
+
+.shikoku{
+  background:#c9dcff;
+}
+
+.kyushu{
+  background:#ffd0b0;
+}
+
+.okinawa{
+  background:#b9eee8;
+}
+
+/* 1以上 */
+
+.pref.active{
+  background:
+    linear-gradient(
+      135deg,
+      #ff7777,
+      #ff3f4f
+    ) !important;
+
+  border-color:#e62b3c;
 
   box-shadow:
-    0 2px 5px rgba(229,57,53,.25);
+    0 3px 8px rgba(230,43,60,.3);
 }
 
-.pref-name{
+.pref.active .name,
+.pref.active .count{
+  color:#8e101c;
+}
+
+/* 番号 */
+
+.number{
+  position:absolute;
+  top:2px;
+  left:3px;
+
+  min-width:14px;
+  height:13px;
+
+  padding:0 2px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:4px;
+
+  background:rgba(255,255,255,.65);
+
+  font-size:6px;
+  font-weight:900;
+  color:#596170;
+}
+
+.active .number{
+  background:#d82939;
+  color:white;
+}
+
+/* 県名 */
+
+.name{
   width:100%;
+
+  padding:0 2px;
 
   text-align:center;
 
-  font-size:9px;
-  line-height:10px;
+  color:#273243;
+
+  font-size:8px;
+  line-height:9px;
 
   font-weight:900;
 
@@ -367,135 +434,67 @@ body{
   text-overflow:ellipsis;
 }
 
-.count{
-  font-size:11px;
-  line-height:12px;
+/* カウント */
 
+.count{
   height:12px;
 
-  color:#555;
+  color:#424a57;
+
+  font-size:11px;
+  line-height:12px;
 
   font-weight:900;
 }
 
 .count.zero{
-  color:#aaa;
+  color:#9299a3;
 }
 
-.pref.completed .pref-name,
-.pref.completed .count{
-  color:#c62828;
-}
-
-
-/* =========================
-   ボタン
-========================= */
+/* ボタン */
 
 .buttons{
-  height:14px;
-
-  display:flex;
-  gap:2px;
-}
-
-.plus,
-.minus{
-  width:20px;
-  height:14px;
-
-  border:0;
-  border-radius:3px;
-
-  padding:0;
+  height:15px;
 
   display:flex;
   align-items:center;
-  justify-content:center;
+  gap:2px;
+}
 
-  font-size:10px;
-  line-height:14px;
+.buttons button{
+  width:20px;
+  height:15px;
+
+  border:0;
+  border-radius:4px;
+
+  font-size:11px;
+  line-height:15px;
 
   font-weight:900;
-}
-
-.plus{
-  background:#333;
-  color:#fff;
-}
-
-.pref.completed .plus{
-  background:#e53935;
 }
 
 .minus{
-  background:#e3e3e7;
+  background:rgba(255,255,255,.75);
   color:#555;
 }
 
-
-/* =========================
-   番号
-========================= */
-
-.pref-number{
-  position:absolute;
-
-  left:2px;
-  top:2px;
-
-  font-size:6px;
-
-  color:#aaa;
-
-  font-weight:900;
+.plus{
+  background:#5140c8;
+  color:white;
 }
 
-.pref.completed .pref-number{
-  color:#e53935;
+.active .plus{
+  background:#d52b3c;
 }
 
-
 /* =========================
-   地図っぽい背景ライン
-========================= */
-
-.map::before{
-  content:"";
-
-  position:absolute;
-
-  left:8%;
-  top:8%;
-
-  width:84%;
-  height:84%;
-
-  border-radius:48% 42% 50% 45%;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent 0 48%,
-      rgba(210,210,220,.18) 49% 51%,
-      transparent 52%
-    );
-
-  transform:rotate(-13deg);
-
-  pointer-events:none;
-}
-
-
-/* =========================
-   タイトルモーダル
+   タイトル変更モーダル
 ========================= */
 
 .modal{
   position:fixed;
-
   inset:0;
-
   z-index:1000;
 
   display:none;
@@ -503,9 +502,9 @@ body{
   align-items:center;
   justify-content:center;
 
-  background:rgba(0,0,0,.55);
-
   padding:20px;
+
+  background:rgba(20,25,40,.6);
 }
 
 .modal.show{
@@ -516,9 +515,9 @@ body{
   width:100%;
   max-width:420px;
 
-  background:#fff;
+  background:white;
 
-  border-radius:18px;
+  border-radius:20px;
 
   padding:18px;
 }
@@ -526,20 +525,19 @@ body{
 .modal-title{
   font-size:18px;
   font-weight:900;
-
   margin-bottom:10px;
 }
 
 .modal-input{
   width:100%;
-  height:44px;
+  height:45px;
 
   border:2px solid #ddd;
   border-radius:10px;
 
   padding:0 10px;
 
-  font-size:15px;
+  font-size:16px;
   font-weight:800;
 
   outline:none;
@@ -547,43 +545,36 @@ body{
 
 .modal-buttons{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:7px;
-
   margin-top:10px;
 }
 
 .modal-buttons button{
-  height:40px;
-
+  height:42px;
   border:0;
   border-radius:10px;
-
-  font-size:13px;
+  font-size:14px;
   font-weight:900;
 }
 
 .modal-save{
-  background:#333;
-  color:#fff;
+  background:#ff5367;
+  color:white;
 }
 
 .modal-close{
-  background:#e5e5e9;
+  background:#e7e8ed;
+  color:#333;
 }
 
-
 /* =========================
-   完成画面
+   全国制覇
 ========================= */
 
 .complete{
   position:fixed;
-
   inset:0;
-
   z-index:2000;
 
   display:none;
@@ -591,9 +582,7 @@ body{
   align-items:center;
   justify-content:center;
 
-  background:rgba(0,0,0,.65);
-
-  padding:20px;
+  background:rgba(20,20,30,.65);
 }
 
 .complete.show{
@@ -602,10 +591,11 @@ body{
 
 .complete-card{
   width:90%;
+  max-width:400px;
 
-  background:#fff;
+  background:white;
 
-  border-radius:24px;
+  border-radius:25px;
 
   padding:25px 15px;
 
@@ -617,153 +607,159 @@ body{
 }
 
 .complete-title{
-  color:#e53935;
-
+  color:#e52d3e;
   font-size:29px;
-
   font-weight:900;
 }
 
 .complete-text{
-  margin-top:4px;
-
-  font-size:15px;
-
+  margin-top:5px;
+  font-size:14px;
   font-weight:800;
 }
 
 .complete-gift{
   margin-top:8px;
-
   font-size:19px;
-
   font-weight:900;
 }
 
 .complete-close{
   margin-top:16px;
 
-  height:40px;
+  height:42px;
 
   padding:0 30px;
 
   border:0;
   border-radius:10px;
 
-  background:#e53935;
+  background:#e52d3e;
 
-  color:#fff;
+  color:white;
 
   font-size:14px;
   font-weight:900;
 }
 
-
 /* =========================
-   小さい画面
+   小さいスマホ
 ========================= */
 
 @media(max-width:380px){
 
   .header{
-    flex-basis:45px;
+    flex-basis:51px;
   }
 
   .title{
-    font-size:16px;
+    font-size:17px;
+    line-height:19px;
   }
 
   .subtitle{
-    font-size:7px;
+    font-size:8px;
+  }
+
+  .edit-title{
+    width:37px;
+    height:37px;
+    font-size:17px;
   }
 
   .gift-box{
-    flex-basis:32px;
-  }
-
-  .status{
     flex-basis:35px;
   }
 
+  .gift-input,
+  .gift-save{
+    height:27px;
+  }
+
+  .gift-label{
+    font-size:10px;
+  }
+
+  .gift-input{
+    font-size:11px;
+  }
+
+  .gift-save{
+    width:49px;
+    font-size:10px;
+  }
+
+  .status{
+    flex-basis:38px;
+  }
+
+  .status-label{
+    font-size:8px;
+  }
+
+  .status-number{
+    font-size:20px;
+  }
+
   .progress-box{
-    flex-basis:29px;
+    flex-basis:34px;
+  }
+
+  .map{
+    padding:3px;
+  }
+
+  .map-grid{
+    gap:2px;
   }
 
   .pref{
-    height:6.7%;
+    border-radius:6px;
   }
 
-  .pref-name{
-    font-size:7px;
-    line-height:8px;
+  .number{
+    min-width:11px;
+    height:11px;
+    font-size:5px;
+  }
+
+  .name{
+    font-size:6.5px;
+    line-height:7px;
   }
 
   .count{
-    font-size:10px;
-    height:11px;
-    line-height:11px;
+    font-size:9px;
+    height:10px;
+    line-height:10px;
   }
 
   .buttons{
     height:12px;
   }
 
-  .plus,
-  .minus{
+  .buttons button{
     width:17px;
     height:12px;
-    font-size:9px;
+    font-size:8px;
     line-height:12px;
   }
-
-}
-
-
-/* =========================
-   極小画面
-========================= */
-
-@media(max-width:350px){
-
-  .pref{
-    width:14.25%;
-  }
-
-  .pref-name{
-    font-size:6px;
-  }
-
-  .count{
-    font-size:9px;
-  }
-
-  .plus,
-  .minus{
-    width:15px;
-  }
-
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="app">
 
-
-  <!-- ======================
-       タイトル
-  ======================= -->
+  <!-- タイトル -->
 
   <div class="header">
 
-    <div>
+    <div class="header-inner">
 
-      <div
-        class="title"
-        id="title">
+      <div id="title" class="title">
         🇯🇵 47都道府県カウンター
       </div>
 
@@ -782,9 +778,7 @@ body{
   </div>
 
 
-  <!-- ======================
-       ギフト
-  ======================= -->
+  <!-- ギフト -->
 
   <div class="gift-box">
 
@@ -811,9 +805,7 @@ body{
   </div>
 
 
-  <!-- ======================
-       ステータス
-  ======================= -->
+  <!-- ステータス -->
 
   <div class="status">
 
@@ -824,19 +816,18 @@ body{
       </span>
 
       <span
-        class="status-number"
-        id="total">
+        id="total"
+        class="status-number">
         0
       </span>
 
       <span
-        class="status-small"
-        id="giftName">
+        id="giftName"
+        class="status-small">
         ハートミー
       </span>
 
     </div>
-
 
     <div class="status-card">
 
@@ -845,8 +836,8 @@ body{
       </span>
 
       <span
-        class="status-number"
-        id="completed">
+        id="completed"
+        class="status-number">
         0
       </span>
 
@@ -859,9 +850,7 @@ body{
   </div>
 
 
-  <!-- ======================
-       進捗
-  ======================= -->
+  <!-- 全国制覇 -->
 
   <div class="progress-box">
 
@@ -880,8 +869,8 @@ body{
     <div class="progress">
 
       <div
-        class="progress-bar"
-        id="progressBar">
+        id="progressBar"
+        class="progress-bar">
       </div>
 
     </div>
@@ -889,26 +878,27 @@ body{
   </div>
 
 
-  <!-- ======================
-       日本地図っぽい47県
-  ======================= -->
+  <!-- =========================
+       日本地図
+  ========================== -->
 
-  <div
-    class="map"
-    id="map">
+  <div class="map">
+
+    <div
+      id="mapGrid"
+      class="map-grid">
+    </div>
+
   </div>
-
 
 </div>
 
 
-<!-- ======================
-     タイトル変更
-======================= -->
+<!-- タイトル変更 -->
 
 <div
-  class="modal"
-  id="titleModal">
+  id="titleModal"
+  class="modal">
 
   <div class="modal-box">
 
@@ -943,13 +933,11 @@ body{
 </div>
 
 
-<!-- ======================
-     全国制覇
-======================= -->
+<!-- 全国制覇 -->
 
 <div
-  class="complete"
-  id="complete">
+  id="complete"
+  class="complete">
 
   <div class="complete-card">
 
@@ -966,8 +954,8 @@ body{
     </div>
 
     <div
-      class="complete-gift"
-      id="completeGift">
+      id="completeGift"
+      class="complete-gift">
       ハートミー
     </div>
 
@@ -984,230 +972,206 @@ body{
 
 <script>
 
-/* ========================================
+/* ==================================================
    47都道府県
-======================================== */
+
+   row / col は日本地図に近い位置関係
+
+   12列 × 12行
+================================================== */
 
 const prefectures = [
 
-  "北海道",
+  /* ======================
+     北海道
+  ====================== */
 
-  "青森県",
-  "岩手県",
-  "宮城県",
-  "秋田県",
-  "山形県",
-  "福島県",
-
-  "茨城県",
-  "栃木県",
-  "群馬県",
-  "埼玉県",
-  "千葉県",
-  "東京都",
-  "神奈川県",
-
-  "新潟県",
-  "富山県",
-  "石川県",
-  "福井県",
-  "山梨県",
-  "長野県",
-  "岐阜県",
-
-  "静岡県",
-  "愛知県",
-  "三重県",
-
-  "滋賀県",
-  "京都府",
-  "大阪府",
-  "兵庫県",
-  "奈良県",
-  "和歌山県",
-
-  "鳥取県",
-  "島根県",
-  "岡山県",
-  "広島県",
-  "山口県",
-
-  "徳島県",
-  "香川県",
-  "愛媛県",
-  "高知県",
-
-  "福岡県",
-  "佐賀県",
-  "長崎県",
-  "熊本県",
-  "大分県",
-  "宮崎県",
-  "鹿児島県",
-
-  "沖縄県"
-
-];
+  ["北海道","hokkaido",1,7],
 
 
-/* ========================================
-   日本地図風の配置
-   left / top は％
-======================================== */
+  /* ======================
+     東北
+  ====================== */
 
-const positions = [
+  ["青森県","tohoku",2,6],
+  ["秋田県","tohoku",3,5],
+  ["岩手県","tohoku",3,7],
 
-  /* 北海道 */
+  ["山形県","tohoku",4,5],
+  ["宮城県","tohoku",4,7],
 
-  [62,3],
-
-
-  /* 東北 */
-
-  [54,12],
-  [66,12],
-  [54,19],
-  [66,19],
-  [54,26],
-  [66,26],
+  ["福島県","tohoku",5,7],
 
 
-  /* 関東 */
+  /* ======================
+     北陸
+  ====================== */
 
-  [70,34],
-  [78,34],
-  [86,34],
-
-  [70,41],
-  [78,41],
-  [86,41],
-  [86,48],
+  ["新潟県","hokuriku",4,3],
+  ["富山県","hokuriku",5,3],
+  ["石川県","hokuriku",5,2],
+  ["福井県","hokuriku",6,2],
 
 
-  /* 北陸・甲信 */
+  /* ======================
+     関東
+  ====================== */
 
-  [45,33],
-  [53,33],
-  [45,40],
-  [53,40],
-  [45,47],
-  [53,47],
-  [61,47],
+  ["群馬県","kanto",5,8],
+  ["栃木県","kanto",5,9],
+  ["茨城県","kanto",6,10],
 
+  ["埼玉県","kanto",6,9],
+  ["東京都","kanto",7,9],
 
-  /* 東海 */
-
-  [61,54],
-  [69,54],
-  [77,54],
-  [69,61],
+  ["千葉県","kanto",7,10],
+  ["神奈川県","kanto",8,9],
 
 
-  /* 関西 */
+  /* ======================
+     甲信
+  ====================== */
 
-  [45,54],
-  [53,54],
-  [45,61],
-  [53,61],
-  [61,61],
-  [45,68],
+  ["長野県","chubu",6,5],
+  ["山梨県","chubu",7,7],
 
 
-  /* 中国 */
+  /* ======================
+     東海
+  ====================== */
 
-  [25,55],
-  [33,55],
-  [25,62],
-  [33,62],
-  [41,62],
-
-
-  /* 四国 */
-
-  [39,72],
-  [47,72],
-  [39,79],
-  [47,79],
+  ["岐阜県","chubu",6,6],
+  ["静岡県","chubu",7,8],
+  ["愛知県","chubu",8,7],
+  ["三重県","chubu",8,6],
 
 
-  /* 九州 */
+  /* ======================
+     関西
+  ====================== */
 
-  [8,70],
-  [16,70],
-  [8,77],
-  [16,77],
-  [24,77],
-  [8,84],
-  [16,84],
+  ["滋賀県","kansai",7,5],
+  ["京都府","kansai",7,4],
+
+  ["兵庫県","kansai",7,3],
+  ["大阪府","kansai",8,4],
+
+  ["奈良県","kansai",8,5],
+  ["和歌山県","kansai",9,4],
 
 
-  /* 沖縄 */
+  /* ======================
+     中国
+  ====================== */
 
-  [4,91]
+  ["鳥取県","chugoku",7,1],
+  ["島根県","chugoku",7,2],
+
+  ["岡山県","chugoku",8,2],
+  ["広島県","chugoku",8,1],
+
+  ["山口県","chugoku",9,1],
+
+
+  /* ======================
+     四国
+  ====================== */
+
+  ["香川県","shikoku",9,6],
+  ["徳島県","shikoku",9,7],
+
+  ["愛媛県","shikoku",10,5],
+  ["高知県","shikoku",10,6],
+
+
+  /* ======================
+     九州
+  ====================== */
+
+  ["福岡県","kyushu",9,2],
+  ["佐賀県","kyushu",10,2],
+
+  ["長崎県","kyushu",10,1],
+  ["熊本県","kyushu",11,2],
+
+  ["大分県","kyushu",10,3],
+  ["宮崎県","kyushu",11,4],
+
+  ["鹿児島県","kyushu",12,3],
+
+
+  /* ======================
+     沖縄
+  ====================== */
+
+  ["沖縄県","okinawa",12,1]
 
 ];
 
 
-/* ========================================
+/* ==================================================
    カウント
-======================================== */
+================================================== */
 
-let counts =
+const counts =
   new Array(47).fill(0);
 
 let giftName =
   "ハートミー";
 
 
-/* ========================================
-   都道府県生成
-======================================== */
+/* ==================================================
+   マップ生成
+================================================== */
 
-function createPrefectures(){
+function createMap(){
 
-  const map =
-    document.getElementById("map");
+  const grid =
+    document.getElementById("mapGrid");
 
-  map.innerHTML = "";
+  grid.innerHTML="";
 
 
   prefectures.forEach(
-    (name,index)=>{
+    (pref,index)=>{
 
-      const pref =
+      const [
+        name,
+        region,
+        row,
+        col
+      ] = pref;
+
+
+      const card =
         document.createElement("div");
 
-      pref.className = "pref";
+      card.className =
+        "pref " + region;
 
-      pref.id =
-        "pref-" + index;
+      card.style.gridRow =
+        row;
 
+      card.style.gridColumn =
+        col;
 
-      const pos =
-        positions[index];
-
-
-      pref.style.left =
-        pos[0] + "%";
-
-      pref.style.top =
-        pos[1] + "%";
+      card.id =
+        "pref-"+index;
 
 
-      pref.innerHTML = `
+      card.innerHTML = `
 
-        <div class="pref-number">
-          ${index + 1}
+        <div class="number">
+          ${index+1}
         </div>
 
-        <div
-          class="pref-name">
+        <div class="name">
           ${name}
         </div>
 
         <div
-          class="count zero"
-          id="count-${index}">
+          id="count-${index}"
+          class="count zero">
           0
         </div>
 
@@ -1215,17 +1179,13 @@ function createPrefectures(){
 
           <button
             class="minus"
-            onclick="
-              changeCount(${index},-1)
-            ">
+            onclick="changeCount(${index},-1)">
             −
           </button>
 
           <button
             class="plus"
-            onclick="
-              changeCount(${index},1)
-            ">
+            onclick="changeCount(${index},1)">
             ＋
           </button>
 
@@ -1234,7 +1194,7 @@ function createPrefectures(){
       `;
 
 
-      map.appendChild(pref);
+      grid.appendChild(card);
 
     }
   );
@@ -1242,36 +1202,31 @@ function createPrefectures(){
 }
 
 
-/* ========================================
+/* ==================================================
    カウント変更
-======================================== */
+================================================== */
 
 function changeCount(index,value){
 
   counts[index] += value;
 
-
   if(counts[index] < 0){
-
-    counts[index] = 0;
-
+    counts[index]=0;
   }
-
 
   update();
 
 }
 
 
-/* ========================================
+/* ==================================================
    更新
-======================================== */
+================================================== */
 
 function update(){
 
-  let total = 0;
-
-  let completed = 0;
+  let total=0;
+  let completed=0;
 
 
   counts.forEach(
@@ -1282,45 +1237,37 @@ function update(){
 
       const count =
         document.getElementById(
-          "count-" + index
+          "count-"+index
         );
 
-      const pref =
+      const card =
         document.getElementById(
-          "pref-" + index
+          "pref-"+index
         );
 
 
-      if(count){
-
-        count.textContent =
-          num;
-
-        count.classList.toggle(
-          "zero",
-          num === 0
-        );
-
-      }
+      count.textContent=num;
 
 
-      if(pref){
+      count.classList.toggle(
+        "zero",
+        num===0
+      );
 
-        if(num > 0){
 
-          pref.classList.add(
-            "completed"
-          );
+      /*
+        1以上なら赤色
+      */
 
-          completed++;
+      if(num>0){
 
-        }else{
+        card.classList.add("active");
 
-          pref.classList.remove(
-            "completed"
-          );
+        completed++;
 
-        }
+      }else{
+
+        card.classList.remove("active");
 
       }
 
@@ -1330,29 +1277,27 @@ function update(){
 
   document.getElementById(
     "total"
-  ).textContent =
-    total;
+  ).textContent=total;
 
 
   document.getElementById(
     "completed"
-  ).textContent =
-    completed;
+  ).textContent=completed;
 
 
   document.getElementById(
     "progressText"
-  ).textContent =
-    completed + " / 47";
+  ).textContent=
+    completed+" / 47";
 
 
   document.getElementById(
     "progressBar"
-  ).style.width =
-    (completed / 47 * 100) + "%";
+  ).style.width=
+    (completed/47*100)+"%";
 
 
-  if(completed === 47){
+  if(completed===47){
 
     showComplete();
 
@@ -1361,9 +1306,9 @@ function update(){
 }
 
 
-/* ========================================
+/* ==================================================
    ギフト名変更
-======================================== */
+================================================== */
 
 function saveGift(){
 
@@ -1376,25 +1321,25 @@ function saveGift(){
     input.value.trim();
 
 
-  if(value){
-
-    giftName =
-      value;
-
-
-    document.getElementById(
-      "giftName"
-    ).textContent =
-      giftName;
-
+  if(!value){
+    return;
   }
+
+
+  giftName=value;
+
+
+  document.getElementById(
+    "giftName"
+  ).textContent=
+    giftName;
 
 }
 
 
-/* ========================================
+/* ==================================================
    タイトル変更
-======================================== */
+================================================== */
 
 function openTitleModal(){
 
@@ -1415,14 +1360,13 @@ function openTitleModal(){
     ).textContent;
 
 
-  modal.classList.add(
-    "show"
-  );
+  modal.classList.add("show");
 
 
   setTimeout(
     ()=>{
       input.focus();
+      input.select();
     },
     100
   );
@@ -1436,9 +1380,7 @@ function closeTitleModal(){
     .getElementById(
       "titleModal"
     )
-    .classList.remove(
-      "show"
-    );
+    .classList.remove("show");
 
 }
 
@@ -1458,7 +1400,7 @@ function saveTitle(){
 
     document.getElementById(
       "title"
-    ).textContent =
+    ).textContent=
       value;
 
   }
@@ -1469,23 +1411,21 @@ function saveTitle(){
 }
 
 
-/* ========================================
+/* ==================================================
    全国制覇
-======================================== */
+================================================== */
 
 function showComplete(){
 
   document.getElementById(
     "completeGift"
-  ).textContent =
+  ).textContent=
     giftName;
 
 
   document.getElementById(
     "complete"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 }
 
@@ -1494,19 +1434,16 @@ function closeComplete(){
 
   document.getElementById(
     "complete"
-  ).classList.remove(
-    "show"
-  );
+  ).classList.remove("show");
 
 }
 
 
-/* ========================================
-   初期化
-======================================== */
+/* ==================================================
+   起動
+================================================== */
 
-createPrefectures();
-
+createMap();
 update();
 
 </script>
