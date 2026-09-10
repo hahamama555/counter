@@ -311,6 +311,7 @@ input{
 .card.done .giftBtn{
   background:#d92b4b;
   opacity:0.9;
+  font-size:20px;
 }
 
 .editBtn{
@@ -325,17 +326,18 @@ input{
   cursor:pointer;
 }
 
+/* 達成時の大きな⭕️マーク */
 .doneMark{
   position:absolute;
-  top:42%;
+  top:45%;
   left:50%;
   transform:translate(-50%, -50%);
-  font-size:38px;
+  font-size:52px;
   font-weight:1000;
-  color:#d92b4b;
+  color:#ff3150;
   pointer-events:none;
-  text-shadow:0 0 4px #fff, 0 0 4px #fff;
-  white-space:nowrap;
+  line-height:1;
+  text-shadow:0 0 6px #fff, 0 0 6px #fff;
 }
 
 /* 配信モード */
@@ -353,8 +355,16 @@ input{
   font-size:16px;
 }
 
+.live .card.done .giftBtn{
+  font-size:24px;
+}
+
 .live .count{
   font-size:24px;
+}
+
+.live .doneMark{
+  font-size:62px;
 }
 
 /* モーダル */
@@ -717,7 +727,7 @@ function render(){
         <button class="giftBtn">
           ${
             card.done
-            ? `<span style="color:#ff3150;">🔴</span> 完成`
+            ? `⭕️`
             : `<span class="coin-icon"></span> ${state.coin}コインギフト`
           }
         </button>
@@ -726,7 +736,7 @@ function render(){
 
         ${
           card.done
-          ? '<div class="doneMark">完成</div>'
+          ? '<div class="doneMark">⭕️</div>'
           : ''
         }
       `;
