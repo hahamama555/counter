@@ -11,10 +11,6 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body{
   margin:0;
   background:#070707;
@@ -890,63 +886,55 @@ $("modeBtn").onclick = function(){
 };
 
 
-/* 自動スクロール制御 */
-let autoScrollTimer = null;
-let scrollDirection = 1; // 1: 下方向（沖縄へ）, -1: 上方向（北海道へ）
+/* 自動スクロール処理 (requestAnimationFrame方式) */
 let isAutoScrolling = false;
+let scrollSpeed = 1; // 1回あたりのスクロール量（px）
+let scrollDirection = 1; // 1: 下(沖縄方向)へ, -1: 上(北海道方向)へ
+let isWaiting = false;
+let animationFrameId = null;
 
-function toggleAutoScroll(){
+function stepScroll() {
+  if (!isAutoScrolling) return;
+
+  if (!isWaiting) {
+    const currentY = window.scrollY || window.pageYOffset;
+    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+
+    // 最下部（沖縄）に到達した場合
+    if (scrollDirection === 1 && currentY >= maxY - 2) {
+      scrollDirection = -1;
+      isWaiting = true;
+      setTimeout(() => { isWaiting = false; }, 1500); // 端で1.5秒待機
+    } 
+    // 最上部（北海道）に到達した場合
+    else if (scrollDirection === -1 && currentY <= 2) {
+      scrollDirection = 1;
+      isWaiting = true;
+      setTimeout(() => { isWaiting = false; }, 1500); // 端で1.5秒待機
+    } else {
+      window.scrollBy(0, scrollDirection * scrollSpeed);
+    }
+  }
+
+  animationFrameId = requestAnimationFrame(stepScroll);
+}
+
+function toggleAutoScroll() {
   isAutoScrolling = !isAutoScrolling;
   const btn = $("scrollBtn");
 
-  if(isAutoScrolling){
+  if (isAutoScrolling) {
     btn.textContent = "📜 スクローラー: ON";
     btn.classList.add("active");
-    startAutoScroll();
+    animationFrameId = requestAnimationFrame(stepScroll);
   } else {
     btn.textContent = "📜 スクローラー: OFF";
     btn.classList.remove("active");
-    stopAutoScroll();
-  }
-}
-
-function startAutoScroll(){
-  stopAutoScroll();
-  
-  autoScrollTimer = setInterval(() => {
-    const currentScroll = window.scrollY;
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-    // 端に達したら方向転換（1秒ほど一時停止させて滑らかに折り返す）
-    if(scrollDirection === 1 && currentScroll >= maxScroll - 2){
-      scrollDirection = -1;
-      pauseAutoScroll(1000);
-      return;
-    } else if(scrollDirection === -1 && currentScroll <= 2){
-      scrollDirection = 1;
-      pauseAutoScroll(1000);
-      return;
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
     }
-
-    // 1ピクセルずつ移動（速度調整可能）
-    window.scrollBy(0, scrollDirection * 1);
-  }, 25); // 25msごとに1px動く（数字を小さくすると速くなります）
-}
-
-function stopAutoScroll(){
-  if(autoScrollTimer){
-    clearInterval(autoScrollTimer);
-    autoScrollTimer = null;
   }
-}
-
-function pauseAutoScroll(duration){
-  stopAutoScroll();
-  setTimeout(() => {
-    if(isAutoScrolling){
-      startAutoScroll();
-    }
-  }, duration);
 }
 
 $("scrollBtn").onclick = toggleAutoScroll;
