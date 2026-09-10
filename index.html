@@ -886,37 +886,36 @@ $("modeBtn").onclick = function(){
 };
 
 
-/* 自動スクロール処理 (requestAnimationFrame方式) */
+/* 確実な自動スクロール制御 */
 let isAutoScrolling = false;
-let scrollSpeed = 1; // 1回あたりのスクロール量（px）
 let scrollDirection = 1; // 1: 下(沖縄方向)へ, -1: 上(北海道方向)へ
 let isWaiting = false;
-let animationFrameId = null;
+let scrollInterval = null;
 
-function stepScroll() {
-  if (!isAutoScrolling) return;
+function scrollLoop() {
+  if (!isAutoScrolling || isWaiting) return;
 
-  if (!isWaiting) {
-    const currentY = window.scrollY || window.pageYOffset;
-    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+  const currentY = Math.ceil(window.scrollY || window.pageYOffset);
+  const maxY = Math.floor(document.documentElement.scrollHeight - window.innerHeight);
 
-    // 最下部（沖縄）に到達した場合
-    if (scrollDirection === 1 && currentY >= maxY - 2) {
-      scrollDirection = -1;
-      isWaiting = true;
-      setTimeout(() => { isWaiting = false; }, 1500); // 端で1.5秒待機
-    } 
-    // 最上部（北海道）に到達した場合
-    else if (scrollDirection === -1 && currentY <= 2) {
-      scrollDirection = 1;
-      isWaiting = true;
-      setTimeout(() => { isWaiting = false; }, 1500); // 端で1.5秒待機
-    } else {
-      window.scrollBy(0, scrollDirection * scrollSpeed);
-    }
+  // 沖縄（一番下）に達した時
+  if (scrollDirection === 1 && currentY >= maxY - 5) {
+    scrollDirection = -1;
+    isWaiting = true;
+    setTimeout(() => { isWaiting = false; }, 1200); // 1.2秒待機後、上に戻る
+    return;
   }
 
-  animationFrameId = requestAnimationFrame(stepScroll);
+  // 北海道（一番上）に達した時
+  if (scrollDirection === -1 && currentY <= 5) {
+    scrollDirection = 1;
+    isWaiting = true;
+    setTimeout(() => { isWaiting = false; }, 1200); // 1.2秒待機後、下に向かう
+    return;
+  }
+
+  // スクロール実行 (1回あたり 1.5px 移動)
+  window.scrollBy(0, scrollDirection * 1.5);
 }
 
 function toggleAutoScroll() {
@@ -926,13 +925,15 @@ function toggleAutoScroll() {
   if (isAutoScrolling) {
     btn.textContent = "📜 スクローラー: ON";
     btn.classList.add("active");
-    animationFrameId = requestAnimationFrame(stepScroll);
+    if (scrollInterval) clearInterval(scrollInterval);
+    // 16ms間隔でスクロールループ処理を呼び出し
+    scrollInterval = setInterval(scrollLoop, 16);
   } else {
     btn.textContent = "📜 スクローラー: OFF";
     btn.classList.remove("active");
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = null;
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+      scrollInterval = null;
     }
   }
 }
