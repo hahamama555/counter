@@ -30,7 +30,7 @@ body{
   top:0;
   z-index:10;
   background:#000;
-  padding:9px;
+  padding:9px 12px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -38,15 +38,20 @@ body{
 
 .top b{
   font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:5px;
 }
 
 #modeBtn{
   border:0;
   border-radius:999px;
-  padding:9px 12px;
+  padding:7px 14px;
   background:#ffd51a;
   color:#111;
   font-weight:900;
+  font-size:13px;
+  cursor:pointer;
 }
 
 /* 編集画面 */
@@ -82,6 +87,7 @@ input{
 .actions{
   display:flex;
   gap:8px;
+  margin-top:10px;
 }
 
 .actions button,
@@ -93,6 +99,7 @@ input{
   background:#333;
   color:#fff;
   font-weight:900;
+  cursor:pointer;
 }
 
 .editor p{
@@ -104,57 +111,83 @@ input{
 /* タイトル */
 .headline{
   margin:10px 7px;
-  padding:12px;
+  padding:14px;
   border-radius:14px;
   text-align:center;
   background:linear-gradient(
     135deg,
-    #791326,
+    #5a0010,
     #171717,
-    #806300
+    #664d00
   );
-  border:1px solid #9b7a18;
+  border:1px solid #7d6210;
 }
 
 #titleView{
-  font-size:clamp(24px,6vw,43px);
+  font-size:clamp(22px, 5.5vw, 36px);
   font-weight:1000;
-  line-height:1.05;
+  line-height:1.1;
 }
 
 #subtitleView{
-  font-size:clamp(18px,4vw,29px);
+  font-size:clamp(15px, 3.8vw, 22px);
   font-weight:900;
-  margin-top:3px;
+  margin-top:4px;
 }
 
 .rule{
-  margin-top:8px;
-  font-size:clamp(13px,3.5vw,21px);
+  margin-top:10px;
+  font-size:clamp(13px,3.5vw,18px);
   font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  flex-wrap:wrap;
 }
 
 .rule b,
 .rule strong{
+  color:#fff;
+}
+
+.rule strong{
   color:#ffe100;
+}
+
+/* コインアイコン (SVG Data URI) */
+.coin-icon{
+  width:20px;
+  height:20px;
+  display:inline-block;
+  vertical-align:middle;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23a6b4c9' stroke='%23ffffff' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='38' fill='%23778899'/%3E%3Cpath d='M40 30 L65 50 L40 70 Z' fill='%23cbd5e1'/%3E%3C/svg%3E");
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
 }
 
 /* 進捗 */
 .progress{
   margin:0 7px 8px;
-  padding:8px;
-  background:#181818;
-  border:1px solid #333;
+  padding:8px 12px;
+  background:#111;
+  border:1px solid #222;
   border-radius:10px;
   display:flex;
-  gap:8px;
+  gap:10px;
   align-items:center;
 }
 
+#progressText{
+  font-size:14px;
+  font-weight:900;
+}
+
 .progress>div{
-  height:9px;
+  height:8px;
   flex:1;
-  background:#333;
+  background:#222;
   border-radius:99px;
   overflow:hidden;
 }
@@ -176,19 +209,20 @@ input{
 
 .card{
   position:relative;
-  background:#faf7ed;
+  background:#f9f7f0;
   color:#111;
-  border:2px solid #e4b91b;
-  border-radius:10px;
-  padding:7px 5px;
-  min-height:148px;
+  border:2px solid #e5c158;
+  border-radius:12px;
+  padding:6px 4px;
+  min-height:155px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  box-shadow:0 2px 4px rgba(0,0,0,0.3);
 }
 
 .card.done{
-  background:#fff3a1;
+  background:#ffef99;
   border-color:#ff3150;
 }
 
@@ -196,73 +230,90 @@ input{
   position:absolute;
   left:4px;
   top:4px;
-  width:24px;
-  height:24px;
+  width:22px;
+  height:22px;
   border-radius:50%;
   display:grid;
   place-items:center;
   background:#6e1cff;
   color:#fff;
-  font-size:12px;
+  font-size:11px;
   font-weight:900;
 }
 
 .pref{
   text-align:center;
-  font-size:13px;
+  font-size:12px;
   font-weight:1000;
-  padding:1px 20px;
+  padding:2px 20px 0;
 }
 
 .shop{
   text-align:center;
-  font-size:14px;
-  font-weight:900;
-  line-height:1.2;
-  min-height:35px;
+  font-size:13px;
+  font-weight:1000;
+  line-height:1.15;
+  min-height:32px;
   display:grid;
   place-items:center;
+  margin:2px 0;
 }
 
 .count{
   text-align:center;
-  font-size:23px;
+  font-size:21px;
   font-weight:1000;
 }
 
 .count small{
-  font-size:11px;
+  font-size:10px;
 }
 
 .giftBtn{
   width:100%;
-  height:45px;
+  height:44px;
   border:0;
   border-radius:8px;
-  background:#d91e3f;
+  background:#d92b4b;
   color:#fff;
   font-weight:1000;
-  font-size:15px;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  cursor:pointer;
+  line-height:1.1;
+}
+
+.card.done .giftBtn{
+  background:#d92b4b;
+  opacity:0.9;
 }
 
 .editBtn{
   width:100%;
-  margin-top:4px;
+  margin-top:3px;
   border:0;
-  border-radius:7px;
-  background:#ddd;
-  padding:5px;
+  border-radius:6px;
+  background:#e2e2e2;
+  padding:4px;
   font-size:11px;
   font-weight:900;
+  cursor:pointer;
 }
 
 .doneMark{
   position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  font-size:62px;
+  top:42%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-size:38px;
+  font-weight:1000;
+  color:#d92b4b;
   pointer-events:none;
+  text-shadow:0 0 4px #fff, 0 0 4px #fff;
+  white-space:nowrap;
 }
 
 /* 配信モード */
@@ -276,12 +327,12 @@ input{
 }
 
 .live .giftBtn{
-  height:58px;
-  font-size:21px;
+  height:54px;
+  font-size:16px;
 }
 
 .live .count{
-  font-size:28px;
+  font-size:24px;
 }
 
 /* モーダル */
@@ -310,7 +361,7 @@ input{
 .modal-head{
   display:flex;
   justify-content:space-between;
-  font-size:20px;
+  font-size:18px;
   margin-bottom:10px;
 }
 
@@ -319,9 +370,10 @@ input{
   background:#333;
   color:#fff;
   border-radius:50%;
-  width:34px;
-  height:34px;
-  font-size:22px;
+  width:32px;
+  height:32px;
+  font-size:20px;
+  cursor:pointer;
 }
 
 .modal-card label{
@@ -334,6 +386,7 @@ input{
 .modal-actions{
   display:flex;
   gap:8px;
+  margin-top:10px;
 }
 
 .modal-actions button:last-child{
@@ -343,36 +396,28 @@ input{
 
 /* スマホ */
 @media(max-width:520px){
-
   .three{
     grid-template-columns:1fr 1fr;
   }
-
   .three label:first-child{
     grid-column:1/-1;
   }
-
 }
 
 @media(max-width:380px){
-
   .board{
     grid-template-columns:repeat(2,1fr);
   }
-
 }
 
 /* PC */
 @media(min-width:700px){
-
   .board{
     grid-template-columns:repeat(5,1fr);
   }
-
   .card{
-    min-height:160px;
+    min-height:165px;
   }
-
 }
 </style>
 </head>
@@ -383,7 +428,7 @@ input{
 
 <header class="top">
   <b>🎯 GIFT COUNT BOARD</b>
-  <button id="modeBtn">▶ 配信モード</button>
+  <button id="modeBtn">✏️ 編集モード</button>
 </header>
 
 <section class="editor" id="editor">
@@ -435,10 +480,10 @@ input{
   <div id="subtitleView"></div>
 
   <div class="rule">
-    🪙
+    <span class="coin-icon"></span>
     <b id="coinView"></b>コイン ×
     <b id="targetView"></b>個 ＝
-    <strong id="totalView"></strong>コインで ⭕
+    <strong id="totalView"></strong>コインで <span style="color:#ff3150;font-size:1.2em;">⭕</span>
   </div>
 
 </section>
@@ -497,7 +542,6 @@ input{
 <script>
 
 const data = [
-
   ["北海道","札幌ラーメン すみれ"],
   ["青森県","青森魚菜センター"],
   ["岩手県","ぴょんぴょん舎"],
@@ -545,526 +589,280 @@ const data = [
   ["宮崎県","おぐら本店"],
   ["鹿児島県","天文館むじゃき"],
   ["沖縄県","A&W"]
-
 ];
 
 
 const KEY = "tiktok_47_coin_board_single_html";
 
 
-let state =
-  JSON.parse(localStorage.getItem(KEY) || "null");
+let state = JSON.parse(localStorage.getItem(KEY) || "null");
 
 
 if(!state){
-
   state = {
-
     title:"全国47都道府県",
-
     subtitle:"有名店47選",
-
-    gift:"さつまいもギフト",
-
+    gift:"5コインギフト",
     coin:5,
-
     target:10,
-
     cards:data.map(x => ({
-
       pref:x[0],
-
       shop:x[1],
-
       count:10,
-
       done:false
-
     }))
-
   };
-
 }
 
 
-const $ = id =>
-  document.getElementById(id);
+const $ = id => document.getElementById(id);
 
 
 let editing = -1;
 
 
 /* HTMLエスケープ */
-
 function esc(value){
-
   return String(value).replace(
     /[&<>"']/g,
     function(m){
-
       return {
-
         "&":"&amp;",
         "<":"&lt;",
         ">":"&gt;",
         '"':"&quot;",
         "'":"&#039;"
-
       }[m];
-
     }
   );
-
 }
 
 
 /* 保存 */
-
 function save(){
-
   localStorage.setItem(
     KEY,
     JSON.stringify(state)
   );
-
 }
 
 
 /* 表示更新 */
-
 function sync(){
+  $("titleView").textContent = state.title;
+  $("subtitleView").textContent = state.subtitle;
+  $("coinView").textContent = state.coin;
+  $("targetView").textContent = state.target;
+  $("totalView").textContent = state.coin * state.target;
 
-  $("titleView").textContent =
-    state.title;
-
-  $("subtitleView").textContent =
-    state.subtitle;
-
-  $("coinView").textContent =
-    state.coin;
-
-  $("targetView").textContent =
-    state.target;
-
-  $("totalView").textContent =
-    state.coin * state.target;
-
-
-  $("titleInput").value =
-    state.title;
-
-  $("subtitleInput").value =
-    state.subtitle;
-
-  $("giftInput").value =
-    state.gift;
-
-  $("coinInput").value =
-    state.coin;
-
-  $("targetInput").value =
-    state.target;
-
+  $("titleInput").value = state.title;
+  $("subtitleInput").value = state.subtitle;
+  $("giftInput").value = state.gift;
+  $("coinInput").value = state.coin;
+  $("targetInput").value = state.target;
 }
 
 
 /* 47マス表示 */
-
 function render(){
-
-  const board =
-    $("board");
-
+  const board = $("board");
   board.innerHTML = "";
-
 
   state.cards.forEach(
     function(card,index){
+      const element = document.createElement("article");
 
-      const element =
-        document.createElement("article");
-
-
-      element.className =
-        "card" +
-        (card.done ? " done" : "");
-
+      element.className = "card" + (card.done ? " done" : "");
 
       element.innerHTML = `
+        <div class="num">${index + 1}</div>
 
-        <div class="num">
-          ${index + 1}
-        </div>
+        <div class="pref">${esc(card.pref)}</div>
 
-        <div class="pref">
-          ${esc(card.pref)}
-        </div>
-
-        <div class="shop">
-          ${esc(card.shop)}
-        </div>
+        <div class="shop">${esc(card.shop)}</div>
 
         <div class="count">
-
           ${
             card.done
-            ? "完成"
-            : `あと ${card.count}<small> 個</small>`
+            ? ""
+            : `あと <b>${card.count}</b><small> 個</small>`
           }
-
         </div>
 
         <button class="giftBtn">
-
           ${
             card.done
-            ? "⭕ 完成"
-            : `🪙 ${state.coin}コインギフト ＋1`
+            ? `<span style="color:#ff3150;">🔴</span> 完成`
+            : `<span class="coin-icon"></span> ${state.coin}コインギフト`
           }
-
         </button>
 
-        <button class="editBtn">
-          ✏️ 編集
-        </button>
+        <button class="editBtn">✏️ 編集</button>
 
         ${
           card.done
-          ? '<div class="doneMark">⭕</div>'
+          ? '<div class="doneMark">完成</div>'
           : ''
         }
-
       `;
 
+      element.querySelector(".giftBtn").onclick = function(){
+        gift(index);
+      };
 
-      element.querySelector(".giftBtn")
-        .onclick = function(){
-
-          gift(index);
-
-        };
-
-
-      element.querySelector(".editBtn")
-        .onclick = function(){
-
-          openEditor(index);
-
-        };
-
+      element.querySelector(".editBtn").onclick = function(){
+        openEditor(index);
+      };
 
       board.appendChild(element);
-
     }
   );
 
+  const completed = state.cards.filter(card => card.done).length;
 
-  const completed =
-    state.cards.filter(
-      card => card.done
-    ).length;
-
-
-  $("progressText").textContent =
-    completed + " / 47";
-
-
-  $("bar").style.width =
-    completed / 47 * 100 + "%";
-
+  $("progressText").textContent = completed + " / 47";
+  $("bar").style.width = (completed / 47 * 100) + "%";
 }
 
 
 /* ギフトを受け取ったとき */
-
 function gift(index){
-
-  const card =
-    state.cards[index];
-
+  const card = state.cards[index];
 
   if(card.done){
     return;
   }
 
-
-  card.count =
-    Math.max(
-      0,
-      card.count - 1
-    );
-
+  card.count = Math.max(0, card.count - 1);
 
   if(card.count === 0){
-
     card.done = true;
-
   }
 
-
   save();
-
   render();
-
 }
 
 
 /* 編集画面 */
-
 function openEditor(index){
-
   editing = index;
+  const card = state.cards[index];
 
-  const card =
-    state.cards[index];
+  $("prefInput").value = card.pref;
+  $("shopInput").value = card.shop;
+  $("countInput").value = card.done ? 0 : card.count;
 
-
-  $("prefInput").value =
-    card.pref;
-
-  $("shopInput").value =
-    card.shop;
-
-  $("countInput").value =
-    card.done
-    ? 0
-    : card.count;
-
-
-  $("modal").classList.remove(
-    "hidden"
-  );
-
+  $("modal").classList.remove("hidden");
 }
 
 
 /* 編集画面を閉じる */
-
 function closeModal(){
-
-  $("modal").classList.add(
-    "hidden"
-  );
-
+  $("modal").classList.add("hidden");
   editing = -1;
-
 }
 
 
 /* 編集保存 */
-
 $("apply").onclick = function(){
-
   if(editing < 0){
     return;
   }
 
+  const card = state.cards[editing];
 
-  const card =
-    state.cards[editing];
-
-
-  card.pref =
-    $("prefInput").value.trim()
-    || card.pref;
-
-
-  card.shop =
-    $("shopInput").value.trim()
-    || card.shop;
-
-
-  card.count =
-    Math.max(
-      0,
-      Number(
-        $("countInput").value
-      ) || 0
-    );
-
-
-  card.done =
-    card.count === 0;
-
+  card.pref = $("prefInput").value.trim() || card.pref;
+  card.shop = $("shopInput").value.trim() || card.shop;
+  card.count = Math.max(0, Number($("countInput").value) || 0);
+  card.done = card.count === 0;
 
   save();
-
   render();
-
   closeModal();
-
 };
 
-
-$("cancel").onclick =
-  closeModal;
-
-$("close").onclick =
-  closeModal;
+$("cancel").onclick = closeModal;
+$("close").onclick = closeModal;
 
 
 /* タイトル */
-
-$("titleInput").oninput =
-  function(){
-
-    state.title =
-      this.value;
-
-    $("titleView").textContent =
-      state.title;
-
-    save();
-
-  };
+$("titleInput").oninput = function(){
+  state.title = this.value;
+  $("titleView").textContent = state.title;
+  save();
+};
 
 
 /* サブタイトル */
-
-$("subtitleInput").oninput =
-  function(){
-
-    state.subtitle =
-      this.value;
-
-    $("subtitleView").textContent =
-      state.subtitle;
-
-    save();
-
-  };
+$("subtitleInput").oninput = function(){
+  state.subtitle = this.value;
+  $("subtitleView").textContent = state.subtitle;
+  save();
+};
 
 
 /* ギフト */
-
-$("giftInput").oninput =
-  function(){
-
-    state.gift =
-      this.value;
-
-    save();
-
-  };
+$("giftInput").oninput = function(){
+  state.gift = this.value;
+  save();
+};
 
 
 /* コイン */
-
-$("coinInput").oninput =
-  function(){
-
-    state.coin =
-      Math.max(
-        1,
-        Number(this.value) || 1
-      );
-
-    sync();
-
-    render();
-
-    save();
-
-  };
+$("coinInput").oninput = function(){
+  state.coin = Math.max(1, Number(this.value) || 1);
+  sync();
+  render();
+  save();
+};
 
 
 /* 必要ギフト数 */
-
-$("targetInput").oninput =
-  function(){
-
-    state.target =
-      Math.max(
-        1,
-        Number(this.value) || 1
-      );
-
-    sync();
-
-    save();
-
-  };
+$("targetInput").oninput = function(){
+  state.target = Math.max(1, Number(this.value) || 1);
+  sync();
+  save();
+};
 
 
 /* 保存 */
-
-$("saveBtn").onclick =
-  function(){
-
-    save();
-
-    this.textContent =
-      "✓ 保存済み";
-
-
-    setTimeout(
-      () => {
-        this.textContent =
-          "💾 保存";
-      },
-      1000
-    );
-
-  };
+$("saveBtn").onclick = function(){
+  save();
+  this.textContent = "✓ 保存済み";
+  setTimeout(() => {
+    this.textContent = "💾 保存";
+  }, 1000);
+};
 
 
 /* 全リセット */
+$("resetBtn").onclick = function(){
+  if(!confirm("47マスをリセットしますか？")){
+    return;
+  }
 
-$("resetBtn").onclick =
-  function(){
+  state.cards.forEach(function(card){
+    card.count = state.target;
+    card.done = false;
+  });
 
-    if(
-      !confirm(
-        "47マスをリセットしますか？"
-      )
-    ){
-
-      return;
-
-    }
-
-
-    state.cards.forEach(
-      function(card){
-
-        card.count =
-          state.target;
-
-        card.done = false;
-
-      }
-    );
+  save();
+  render();
+};
 
 
-    save();
-
-    render();
-
-  };
-
-
-/* 配信モード */
-
-$("modeBtn").onclick =
-  function(){
-
-    document.body.classList.toggle(
-      "live"
-    );
-
-
-    this.textContent =
-      document.body.classList.contains("live")
-      ? "✏️ 編集モード"
-      : "▶ 配信モード";
-
-  };
+/* 配信モード切り替え */
+$("modeBtn").onclick = function(){
+  document.body.classList.toggle("live");
+  this.textContent = document.body.classList.contains("live")
+    ? "✏️ 編集モード"
+    : "▶ 配信モード";
+};
 
 
 /* 初期表示 */
-
 sync();
-
 render();
 
 </script>
