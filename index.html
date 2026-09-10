@@ -11,6 +11,10 @@
   -webkit-tap-highlight-color:transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body{
   margin:0;
   background:#070707;
@@ -34,6 +38,7 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:6px;
 }
 
 .top b{
@@ -43,15 +48,36 @@ body{
   gap:5px;
 }
 
+.top-btns{
+  display:flex;
+  gap:6px;
+}
+
+#scrollBtn,
 #modeBtn{
   border:0;
   border-radius:999px;
-  padding:7px 14px;
+  padding:7px 12px;
+  font-weight:900;
+  font-size:12px;
+  cursor:pointer;
+}
+
+#modeBtn{
   background:#ffd51a;
   color:#111;
-  font-weight:900;
-  font-size:13px;
-  cursor:pointer;
+}
+
+#scrollBtn{
+  background:#333;
+  color:#fff;
+  border:1px solid #555;
+}
+
+#scrollBtn.active{
+  background:#ff3150;
+  color:#fff;
+  border-color:#ff3150;
 }
 
 /* 編集画面 */
@@ -428,7 +454,10 @@ input{
 
 <header class="top">
   <b>🎯 GIFT COUNT BOARD</b>
-  <button id="modeBtn">✏️ 編集モード</button>
+  <div class="top-btns">
+    <button id="scrollBtn">📜 スクローラー: OFF</button>
+    <button id="modeBtn">✏️ 編集モード</button>
+  </div>
 </header>
 
 <section class="editor" id="editor">
@@ -859,6 +888,68 @@ $("modeBtn").onclick = function(){
     ? "✏️ 編集モード"
     : "▶ 配信モード";
 };
+
+
+/* 自動スクロール制御 */
+let autoScrollTimer = null;
+let scrollDirection = 1; // 1: 下方向（沖縄へ）, -1: 上方向（北海道へ）
+let isAutoScrolling = false;
+
+function toggleAutoScroll(){
+  isAutoScrolling = !isAutoScrolling;
+  const btn = $("scrollBtn");
+
+  if(isAutoScrolling){
+    btn.textContent = "📜 スクローラー: ON";
+    btn.classList.add("active");
+    startAutoScroll();
+  } else {
+    btn.textContent = "📜 スクローラー: OFF";
+    btn.classList.remove("active");
+    stopAutoScroll();
+  }
+}
+
+function startAutoScroll(){
+  stopAutoScroll();
+  
+  autoScrollTimer = setInterval(() => {
+    const currentScroll = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+    // 端に達したら方向転換（1秒ほど一時停止させて滑らかに折り返す）
+    if(scrollDirection === 1 && currentScroll >= maxScroll - 2){
+      scrollDirection = -1;
+      pauseAutoScroll(1000);
+      return;
+    } else if(scrollDirection === -1 && currentScroll <= 2){
+      scrollDirection = 1;
+      pauseAutoScroll(1000);
+      return;
+    }
+
+    // 1ピクセルずつ移動（速度調整可能）
+    window.scrollBy(0, scrollDirection * 1);
+  }, 25); // 25msごとに1px動く（数字を小さくすると速くなります）
+}
+
+function stopAutoScroll(){
+  if(autoScrollTimer){
+    clearInterval(autoScrollTimer);
+    autoScrollTimer = null;
+  }
+}
+
+function pauseAutoScroll(duration){
+  stopAutoScroll();
+  setTimeout(() => {
+    if(isAutoScrolling){
+      startAutoScroll();
+    }
+  }, duration);
+}
+
+$("scrollBtn").onclick = toggleAutoScroll;
 
 
 /* 初期表示 */
