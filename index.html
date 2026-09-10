@@ -271,7 +271,7 @@ input{
   color:#555;
 }
 
-/* 店名を大きく強調 */
+/* 店名 */
 .shop{
   text-align:center;
   font-size:16px;
@@ -284,14 +284,17 @@ input{
   word-break:break-word;
 }
 
+/* あと何個の文字色を鮮やかな赤強調に変更 */
 .count{
   text-align:center;
   font-size:21px;
   font-weight:1000;
+  color:#d92b4b;
 }
 
 .count small{
   font-size:10px;
+  color:#d92b4b;
 }
 
 .giftBtn{
@@ -309,6 +312,8 @@ input{
   gap:4px;
   cursor:pointer;
   line-height:1.1;
+  word-break:break-all;
+  padding:0 4px;
 }
 
 .card.done .giftBtn{
@@ -738,7 +743,7 @@ function render(){
           ${
             card.done
             ? `⭕️`
-            : `<span class="coin-icon"></span> ${state.coin}コインギフト`
+            : esc(state.gift || "ギフト")
           }
         </button>
 
@@ -847,14 +852,15 @@ $("subtitleInput").oninput = function(){
 };
 
 
-/* ギフト名 */
+/* ギフト名（マス内ボタン表示へ即時反映） */
 $("giftInput").oninput = function(){
   state.gift = this.value;
+  render();
   save();
 };
 
 
-/* 1個のコイン数（確実に即時反映・再描画） */
+/* 1個のコイン数 */
 function updateCoinValue(valStr) {
   const num = parseInt(valStr, 10);
   state.coin = isNaN(num) || num < 1 ? 1 : num;
