@@ -2,1392 +2,1070 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,
-      maximum-scale=1.0,user-scalable=no">
-
-<title>47都道府県ギフトカウンター</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>TikTok LIVE 47都道府県ギフトカウント</title>
 
 <style>
-
 *{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
   margin:0;
-  padding:0;
+  background:#070707;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif;
 }
-
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Noto Sans JP",
-    "Yu Gothic",
-    sans-serif;
-
-  background:#f4f5f8;
-}
-
-button,
-input{
-  font-family:inherit;
-}
-
-
-/* ==============================
-   全体
-============================== */
 
 .app{
-  width:100%;
-  height:100dvh;
+  max-width:900px;
+  margin:auto;
+  padding-bottom:25px;
+}
 
+/* 上部 */
+.top{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#000;
+  padding:9px;
   display:flex;
-  flex-direction:column;
-
-  overflow:hidden;
+  justify-content:space-between;
+  align-items:center;
 }
 
-
-/* ==============================
-   ヘッダー
-============================== */
-
-.header{
-  flex:0 0 auto;
-
-  padding:7px 9px 8px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff5968,
-      #ff7a45
-    );
-
-  color:white;
-
-  box-shadow:
-    0 2px 7px rgba(0,0,0,.15);
+.top b{
+  font-size:13px;
 }
 
+#modeBtn{
+  border:0;
+  border-radius:999px;
+  padding:9px 12px;
+  background:#ffd51a;
+  color:#111;
+  font-weight:900;
+}
+
+/* 編集画面 */
+.editor{
+  padding:11px;
+  background:#121212;
+  border-bottom:1px solid #333;
+}
+
+.editor label{
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+input{
+  width:100%;
+  margin-top:4px;
+  padding:10px;
+  border:1px solid #555;
+  border-radius:8px;
+  background:#252525;
+  color:#fff;
+}
+
+.three{
+  display:grid;
+  grid-template-columns:1.2fr .8fr .8fr;
+  gap:7px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+}
+
+.actions button,
+.modal-actions button{
+  flex:1;
+  border:0;
+  border-radius:8px;
+  padding:10px;
+  background:#333;
+  color:#fff;
+  font-weight:900;
+}
+
+.editor p{
+  margin:8px 0 0;
+  color:#aaa;
+  font-size:11px;
+}
 
 /* タイトル */
-
-.title-row{
-  width:100%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  gap:6px;
-}
-
-.title{
-  min-width:0;
-
-  font-size:
-    clamp(16px,4.3vw,24px);
-
-  font-weight:900;
-
-  line-height:1.15;
-
+.headline{
+  margin:10px 7px;
+  padding:12px;
+  border-radius:14px;
   text-align:center;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
+  background:linear-gradient(
+    135deg,
+    #791326,
+    #171717,
+    #806300
+  );
+  border:1px solid #9b7a18;
 }
 
-.edit-title{
-  flex:0 0 auto;
-
-  width:27px;
-  height:27px;
-
-  border:0;
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.25);
-
-  color:white;
-
-  font-size:14px;
-
-  cursor:pointer;
+#titleView{
+  font-size:clamp(24px,6vw,43px);
+  font-weight:1000;
+  line-height:1.05;
 }
 
-
-/* ==============================
-   ギフト設定
-============================== */
-
-.gift-area{
-  width:100%;
-
-  display:flex;
-
-  gap:5px;
-
-  margin-top:6px;
-}
-
-.gift-input{
-  flex:1;
-
-  min-width:0;
-
-  height:31px;
-
-  border:0;
-
-  border-radius:7px;
-
-  padding:0 9px;
-
-  background:white;
-
-  color:#333;
-
-  font-size:13px;
-
-  font-weight:bold;
-
-  outline:none;
-}
-
-.save-gift{
-  flex:0 0 55px;
-
-  height:31px;
-
-  border:0;
-
-  border-radius:7px;
-
-  background:white;
-
-  color:#ef4b59;
-
-  font-size:12px;
-
+#subtitleView{
+  font-size:clamp(18px,4vw,29px);
   font-weight:900;
-
-  cursor:pointer;
+  margin-top:3px;
 }
 
-
-/* ==============================
-   ステータス
-============================== */
-
-.status{
-  flex:0 0 auto;
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:6px;
-
-  padding:5px 8px 4px;
-
-  background:white;
+.rule{
+  margin-top:8px;
+  font-size:clamp(13px,3.5vw,21px);
+  font-weight:900;
 }
 
-.status-box{
-  height:39px;
+.rule b,
+.rule strong{
+  color:#ffe100;
+}
 
-  border-radius:8px;
-
-  background:#f1f2f6;
-
+/* 進捗 */
+.progress{
+  margin:0 7px 8px;
+  padding:8px;
+  background:#181818;
+  border:1px solid #333;
+  border-radius:10px;
   display:flex;
-
-  flex-direction:column;
-
+  gap:8px;
   align-items:center;
-
-  justify-content:center;
 }
 
-.status-label{
-  font-size:9px;
-
-  color:#666;
-
-  font-weight:bold;
-
-  line-height:1.1;
-}
-
-.status-value{
-  margin-top:2px;
-
-  font-size:18px;
-
-  color:#222;
-
-  font-weight:900;
-
-  line-height:1;
-}
-
-
-/* ==============================
-   プログレスバー
-============================== */
-
-.progress-area{
-  flex:0 0 auto;
-
-  padding:2px 9px 5px;
-
-  background:white;
-}
-
-.progress-bg{
-  width:100%;
-
-  height:8px;
-
-  background:#e5e7eb;
-
-  border-radius:20px;
-
-  overflow:hidden;
-}
-
-.progress-bar{
-  width:0%;
-
-  height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      #ff6973,
-      #ff384b
-    );
-
-  border-radius:20px;
-
-  transition:width .25s ease;
-}
-
-
-/* ==============================
-   都道府県エリア
-============================== */
-
-.pref-area{
+.progress>div{
+  height:9px;
   flex:1;
-
-  min-height:0;
-
-  padding:4px 6px 6px;
-
+  background:#333;
+  border-radius:99px;
   overflow:hidden;
 }
 
-
-/* ==============================
-   3列 × 16行
-============================== */
-
-.pref-grid{
-  width:100%;
+.progress i{
+  display:block;
   height:100%;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,minmax(0,1fr));
-
-  grid-template-rows:
-    repeat(16,minmax(0,1fr));
-
-  gap:3px;
+  width:0;
+  background:#ffd51a;
 }
 
+/* 47マス */
+.board{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  padding:0 6px;
+}
 
-/* ==============================
-   都道府県カード
-============================== */
+.card{
+  position:relative;
+  background:#faf7ed;
+  color:#111;
+  border:2px solid #e4b91b;
+  border-radius:10px;
+  padding:7px 5px;
+  min-height:148px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.card.done{
+  background:#fff3a1;
+  border-color:#ff3150;
+}
+
+.num{
+  position:absolute;
+  left:4px;
+  top:4px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#6e1cff;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+}
 
 .pref{
-  min-width:0;
-  min-height:0;
+  text-align:center;
+  font-size:13px;
+  font-weight:1000;
+  padding:1px 20px;
+}
 
-  border:
-    2px solid rgba(0,0,0,.08);
-
-  border-radius:6px;
-
+.shop{
+  text-align:center;
+  font-size:14px;
+  font-weight:900;
+  line-height:1.2;
+  min-height:35px;
   display:grid;
-
-  /*
-    都道府県名を最大限広くする
-  */
-
-  grid-template-columns:
-    minmax(0,1fr)
-    24px
-    40px;
-
-  align-items:center;
-
-  gap:3px;
-
-  padding:
-    2px 3px 2px 6px;
-
-  overflow:hidden;
-
-  transition:
-    background .2s,
-    border .2s,
-    box-shadow .2s;
+  place-items:center;
 }
 
+.count{
+  text-align:center;
+  font-size:23px;
+  font-weight:1000;
+}
 
-/* ==============================
-   都道府県名
-============================== */
+.count small{
+  font-size:11px;
+}
 
-.pref-name{
-  min-width:0;
-
+.giftBtn{
   width:100%;
-
-  display:block;
-
-  /*
-    長い都道府県名も
-    なるべく大きく表示
-  */
-
-  font-size:
-    clamp(10px,2.75vw,17px);
-
-  font-weight:900;
-
-  line-height:1;
-
-  color:#222;
-
-  white-space:nowrap;
-
-  /*
-    文字を途中で切らない
-  */
-
-  overflow:visible;
-
-  text-overflow:clip;
-
-  text-align:left;
-
-  letter-spacing:-.4px;
-}
-
-
-/* ==============================
-   都道府県情報
-============================== */
-
-.pref-info{
-  min-width:0;
-
-  width:100%;
-
-  display:flex;
-
-  align-items:center;
-
-  overflow:visible;
-}
-
-
-/* ==============================
-   カウンター
-============================== */
-
-.pref-count{
-  width:22px;
-  height:22px;
-
-  flex:0 0 22px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:50%;
-
-  background:white;
-
-  color:#333;
-
-  font-size:10px;
-
-  font-weight:900;
-
-  border:
-    1px solid rgba(0,0,0,.08);
-}
-
-
-/* ==============================
-   ＋−
-============================== */
-
-.pref-buttons{
-  width:40px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:flex-end;
-
-  gap:2px;
-}
-
-.pref-btn{
-  width:19px;
-  height:19px;
-
-  flex:0 0 19px;
-
+  height:45px;
   border:0;
+  border-radius:8px;
+  background:#d91e3f;
+  color:#fff;
+  font-weight:1000;
+  font-size:15px;
+}
 
-  border-radius:4px;
-
-  background:white;
-
-  color:#333;
-
-  font-size:12px;
-
+.editBtn{
+  width:100%;
+  margin-top:4px;
+  border:0;
+  border-radius:7px;
+  background:#ddd;
+  padding:5px;
+  font-size:11px;
   font-weight:900;
-
-  line-height:19px;
-
-  padding:0;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 1px 2px rgba(0,0,0,.08);
 }
 
-.pref-btn:active{
-  transform:scale(.88);
+.doneMark{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:62px;
+  pointer-events:none;
 }
 
-
-/* ==============================
-   地方別カラー
-============================== */
-
-.hokkaido{
-  background:#d9f1ff;
+/* 配信モード */
+.live .editor,
+.live .editBtn{
+  display:none;
 }
 
-.tohoku{
-  background:#d9f3df;
+.live .card{
+  min-height:165px;
 }
 
-.kanto{
-  background:#ffe2bd;
+.live .giftBtn{
+  height:58px;
+  font-size:21px;
 }
 
-.hokuriku{
-  background:#e6d8ff;
+.live .count{
+  font-size:28px;
 }
 
-.koshin{
-  background:#e7ddff;
-}
-
-.tokai{
-  background:#fff0a8;
-}
-
-.kansai{
-  background:#ffd9e6;
-}
-
-.chugoku{
-  background:#d4f1e5;
-}
-
-.shikoku{
-  background:#d8ecff;
-}
-
-.kyushu{
-  background:#ffe0c7;
-}
-
-.okinawa{
-  background:#ccefea;
-}
-
-
-/* ==============================
-   ギフト達成済み
-============================== */
-
-.pref.active{
-  background:
-    linear-gradient(
-      135deg,
-      #ff8b8b,
-      #ff3e50
-    ) !important;
-
-  border-color:#e52f40;
-
-  box-shadow:
-    0 1px 4px
-    rgba(255,50,70,.35);
-}
-
-.pref.active .pref-name{
-  color:white;
-}
-
-.pref.active .pref-count{
-  background:white;
-
-  color:#ed3447;
-
-  border-color:white;
-}
-
-
-/* ==============================
-   モーダル
-============================== */
-
+/* モーダル */
 .modal{
   position:fixed;
-
   inset:0;
+  background:#000c;
+  z-index:30;
+  display:grid;
+  place-items:center;
+  padding:15px;
+}
 
+.hidden{
   display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    rgba(0,0,0,.5);
-
-  z-index:1000;
 }
 
-.modal.show{
+.modal-card{
+  width:min(470px,100%);
+  background:#191919;
+  border:1px solid #555;
+  border-radius:14px;
+  padding:15px;
+}
+
+.modal-head{
   display:flex;
+  justify-content:space-between;
+  font-size:20px;
+  margin-bottom:10px;
 }
 
-.modal-box{
-  width:min(88vw,360px);
-
-  background:white;
-
-  border-radius:15px;
-
-  padding:20px;
-
-  box-shadow:
-    0 10px 40px
-    rgba(0,0,0,.3);
-}
-
-.modal-title{
-  font-size:18px;
-
-  font-weight:900;
-
-  text-align:center;
-
-  margin-bottom:12px;
-}
-
-.modal-input{
-  width:100%;
-
-  height:42px;
-
-  border:2px solid #ddd;
-
-  border-radius:8px;
-
-  padding:0 10px;
-
-  font-size:15px;
-
-  outline:none;
-}
-
-.modal-buttons{
-  display:flex;
-
-  gap:7px;
-
-  margin-top:12px;
-}
-
-.modal-btn{
-  flex:1;
-
-  height:40px;
-
+.modal-head button{
   border:0;
-
-  border-radius:8px;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  cursor:pointer;
-}
-
-.cancel{
-  background:#eee;
-
-  color:#444;
-}
-
-.ok{
-  background:#ff5261;
-
-  color:white;
-}
-
-
-/* ==============================
-   完成画面
-============================== */
-
-.complete-title{
-  color:#ff4352;
-
+  background:#333;
+  color:#fff;
+  border-radius:50%;
+  width:34px;
+  height:34px;
   font-size:22px;
-
-  font-weight:900;
-
-  text-align:center;
 }
 
-.complete-text{
-  margin-top:10px;
-
-  text-align:center;
-
-  font-weight:bold;
-
-  line-height:1.6;
-}
-
-.complete-gift{
+.modal-card label{
   display:block;
-
-  margin-top:5px;
-
-  color:#ff4352;
-
-  font-size:19px;
-
+  font-size:12px;
   font-weight:900;
+  margin-bottom:9px;
 }
 
+.modal-actions{
+  display:flex;
+  gap:8px;
+}
 
-/* ==============================
-   小さいスマホ
-============================== */
+.modal-actions button:last-child{
+  background:#ffd51a;
+  color:#111;
+}
 
-@media(max-width:360px){
+/* スマホ */
+@media(max-width:520px){
 
-  .pref{
-
-    grid-template-columns:
-      minmax(0,1fr)
-      22px
-      38px;
-
-    padding-left:5px;
-
-    gap:2px;
+  .three{
+    grid-template-columns:1fr 1fr;
   }
 
-  .pref-name{
-    font-size:10px;
-
-    letter-spacing:-.5px;
-  }
-
-  .pref-count{
-    width:20px;
-    height:20px;
-
-    flex-basis:20px;
-
-    font-size:9px;
-  }
-
-  .pref-buttons{
-    width:38px;
-  }
-
-  .pref-btn{
-    width:18px;
-    height:18px;
-
-    flex-basis:18px;
-
-    font-size:11px;
+  .three label:first-child{
+    grid-column:1/-1;
   }
 
 }
 
+@media(max-width:380px){
 
-/* ==============================
-   高さが小さいスマホ
-============================== */
-
-@media(max-height:700px){
-
-  .header{
-    padding-top:5px;
-    padding-bottom:6px;
-  }
-
-  .gift-area{
-    margin-top:4px;
-  }
-
-  .status{
-    padding-top:4px;
-    padding-bottom:3px;
-  }
-
-  .status-box{
-    height:34px;
-  }
-
-  .progress-area{
-    padding-bottom:3px;
-  }
-
-  .pref-area{
-    padding-top:3px;
-    padding-bottom:4px;
+  .board{
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
 
+/* PC */
+@media(min-width:700px){
+
+  .board{
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  .card{
+    min-height:160px;
+  }
+
+}
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-
-<!-- =========================================
-     ヘッダー
-========================================= -->
-
-<header class="header">
-
-  <div class="title-row">
-
-    <div
-      class="title"
-      id="title">
-      47都道府県ギフトカウンター
-    </div>
-
-    <button
-      class="edit-title"
-      onclick="openTitleModal()">
-      ✏️
-    </button>
-
-  </div>
-
-
-  <div class="gift-area">
-
-    <input
-      type="text"
-      id="giftInput"
-      class="gift-input"
-      value="指定ギフト"
-      placeholder="指定ギフト名">
-
-    <button
-      class="save-gift"
-      onclick="saveGift()">
-      保存
-    </button>
-
-  </div>
-
+<header class="top">
+  <b>🎯 GIFT COUNT BOARD</b>
+  <button id="modeBtn">▶ 配信モード</button>
 </header>
 
+<section class="editor" id="editor">
 
+  <label>
+    タイトル
+    <input id="titleInput">
+  </label>
 
-<!-- =========================================
-     ステータス
-========================================= -->
+  <label>
+    サブタイトル
+    <input id="subtitleInput">
+  </label>
 
-<section class="status">
+  <div class="three">
 
-  <div class="status-box">
+    <label>
+      ギフト名
+      <input id="giftInput">
+    </label>
 
-    <div class="status-label">
-      全国ギフト数
-    </div>
+    <label>
+      1個のコイン数
+      <input id="coinInput" type="number" min="1">
+    </label>
 
-    <div
-      class="status-value"
-      id="total">
-      0
-    </div>
+    <label>
+      必要ギフト数
+      <input id="targetInput" type="number" min="1">
+    </label>
 
   </div>
 
+  <div class="actions">
+    <button id="saveBtn">💾 保存</button>
+    <button id="resetBtn">↺ 全リセット</button>
+  </div>
 
-  <div class="status-box">
+  <p>
+    タイトル・ギフト名・コイン数・必要ギフト数を自由に変更できます。
+  </p>
 
-    <div class="status-label">
-      達成都道府県
-    </div>
+</section>
 
-    <div class="status-value">
+<section class="headline">
 
-      <span id="completed">0</span>/47
+  <div id="titleView"></div>
 
-    </div>
+  <div id="subtitleView"></div>
 
+  <div class="rule">
+    🪙
+    <b id="coinView"></b>コイン ×
+    <b id="targetView"></b>個 ＝
+    <strong id="totalView"></strong>コインで ⭕
   </div>
 
 </section>
 
+<div class="progress">
 
+  <b id="progressText">0 / 47</b>
 
-<!-- =========================================
-     プログレス
-========================================= -->
-
-<section class="progress-area">
-
-  <div class="progress-bg">
-
-    <div
-      class="progress-bar"
-      id="progress">
-    </div>
-
+  <div>
+    <i id="bar"></i>
   </div>
 
-</section>
+</div>
 
-
-
-<!-- =========================================
-     47都道府県
-========================================= -->
-
-<main class="pref-area">
-
-  <div
-    class="pref-grid"
-    id="prefGrid">
-  </div>
-
-</main>
+<main id="board" class="board"></main>
 
 </div>
 
 
+<!-- 編集モーダル -->
 
-<!-- =========================================
-     タイトル変更
-========================================= -->
+<div id="modal" class="modal hidden">
 
-<div
-  class="modal"
-  id="titleModal">
+  <div class="modal-card">
 
-  <div class="modal-box">
-
-    <div class="modal-title">
-      タイトルを変更
+    <div class="modal-head">
+      <b>マスを編集</b>
+      <button id="close">×</button>
     </div>
 
-    <input
-      type="text"
-      id="titleInput"
-      class="modal-input"
-      placeholder="タイトルを入力">
+    <label>
+      都道府県
+      <input id="prefInput">
+    </label>
 
-    <div class="modal-buttons">
+    <label>
+      店名・名前
+      <input id="shopInput">
+    </label>
 
-      <button
-        class="modal-btn cancel"
-        onclick="closeTitleModal()">
-        キャンセル
-      </button>
+    <label>
+      残りギフト数
+      <input id="countInput" type="number" min="0">
+    </label>
 
-      <button
-        class="modal-btn ok"
-        onclick="saveTitle()">
-        保存
-      </button>
-
+    <div class="modal-actions">
+      <button id="cancel">キャンセル</button>
+      <button id="apply">保存</button>
     </div>
 
   </div>
 
 </div>
-
-
-
-<!-- =========================================
-     全47県達成
-========================================= -->
-
-<div
-  class="modal"
-  id="completeModal">
-
-  <div class="modal-box">
-
-    <div class="complete-title">
-      🎉 全47都道府県達成！
-    </div>
-
-    <div class="complete-text">
-
-      指定ギフト
-
-      <span
-        class="complete-gift"
-        id="completeGift">
-        指定ギフト
-      </span>
-
-      が全都道府県に入りました！
-
-    </div>
-
-    <div class="modal-buttons">
-
-      <button
-        class="modal-btn ok"
-        onclick="closeCompleteModal()">
-        OK
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
 
 
 <script>
 
-/* =========================================
-   47都道府県
-========================================= */
+const data = [
 
-const prefectures = [
-
-  {name:"北海道",region:"hokkaido"},
-
-  {name:"青森県",region:"tohoku"},
-  {name:"岩手県",region:"tohoku"},
-  {name:"宮城県",region:"tohoku"},
-  {name:"秋田県",region:"tohoku"},
-  {name:"山形県",region:"tohoku"},
-  {name:"福島県",region:"tohoku"},
-
-  {name:"茨城県",region:"kanto"},
-  {name:"栃木県",region:"kanto"},
-  {name:"群馬県",region:"kanto"},
-  {name:"埼玉県",region:"kanto"},
-  {name:"千葉県",region:"kanto"},
-  {name:"東京都",region:"kanto"},
-  {name:"神奈川県",region:"kanto"},
-
-  {name:"新潟県",region:"hokuriku"},
-  {name:"富山県",region:"hokuriku"},
-  {name:"石川県",region:"hokuriku"},
-  {name:"福井県",region:"hokuriku"},
-
-  {name:"山梨県",region:"koshin"},
-  {name:"長野県",region:"koshin"},
-
-  {name:"岐阜県",region:"tokai"},
-  {name:"静岡県",region:"tokai"},
-  {name:"愛知県",region:"tokai"},
-  {name:"三重県",region:"tokai"},
-
-  {name:"滋賀県",region:"kansai"},
-  {name:"京都府",region:"kansai"},
-  {name:"大阪府",region:"kansai"},
-  {name:"兵庫県",region:"kansai"},
-  {name:"奈良県",region:"kansai"},
-  {name:"和歌山県",region:"kansai"},
-
-  {name:"鳥取県",region:"chugoku"},
-  {name:"島根県",region:"chugoku"},
-  {name:"岡山県",region:"chugoku"},
-  {name:"広島県",region:"chugoku"},
-  {name:"山口県",region:"chugoku"},
-
-  {name:"徳島県",region:"shikoku"},
-  {name:"香川県",region:"shikoku"},
-  {name:"愛媛県",region:"shikoku"},
-  {name:"高知県",region:"shikoku"},
-
-  {name:"福岡県",region:"kyushu"},
-  {name:"佐賀県",region:"kyushu"},
-  {name:"長崎県",region:"kyushu"},
-  {name:"熊本県",region:"kyushu"},
-  {name:"大分県",region:"kyushu"},
-  {name:"宮崎県",region:"kyushu"},
-  {name:"鹿児島県",region:"kyushu"},
-
-  {name:"沖縄県",region:"okinawa"}
+  ["北海道","札幌ラーメン すみれ"],
+  ["青森県","青森魚菜センター"],
+  ["岩手県","ぴょんぴょん舎"],
+  ["宮城県","牛たん炭焼 利久"],
+  ["秋田県","佐藤養助 総本店"],
+  ["山形県","腰掛庵"],
+  ["福島県","柏屋"],
+  ["茨城県","めんたいパーク大洗"],
+  ["栃木県","宇都宮みんみん"],
+  ["群馬県","水沢うどん 大澤屋"],
+  ["埼玉県","山田うどん食堂"],
+  ["千葉県","とみ田"],
+  ["東京都","浅草 今半"],
+  ["神奈川県","崎陽軒"],
+  ["新潟県","とんかつ太郎"],
+  ["富山県","白えび亭"],
+  ["石川県","近江町市場"],
+  ["福井県","ヨーロッパ軒"],
+  ["山梨県","ほうとう不動"],
+  ["長野県","明治亭"],
+  ["岐阜県","川上屋"],
+  ["静岡県","さわやか"],
+  ["愛知県","矢場とん"],
+  ["三重県","赤福"],
+  ["滋賀県","毛利志満"],
+  ["京都府","よーじや"],
+  ["大阪府","551蓬莱"],
+  ["兵庫県","神戸元町 別館牡丹園"],
+  ["奈良県","柿の葉すし本舗"],
+  ["和歌山県","井出商店"],
+  ["鳥取県","すなば珈琲"],
+  ["島根県","しまねお魚センター"],
+  ["岡山県","えびめしや"],
+  ["広島県","お好み村"],
+  ["山口県","いろり山賊"],
+  ["徳島県","徳島ラーメン東大"],
+  ["香川県","山越うどん"],
+  ["愛媛県","霧の森菓子工房"],
+  ["高知県","明神丸"],
+  ["福岡県","一蘭"],
+  ["佐賀県","井手ちゃんぽん"],
+  ["長崎県","吉宗"],
+  ["熊本県","桂花ラーメン"],
+  ["大分県","岡本屋売店"],
+  ["宮崎県","おぐら本店"],
+  ["鹿児島県","天文館むじゃき"],
+  ["沖縄県","A&W"]
 
 ];
 
 
-/* =========================================
-   カウント
-========================================= */
-
-const counts =
-  new Array(47).fill(0);
-
-let completedAlready = false;
+const KEY = "tiktok_47_coin_board_single_html";
 
 
-/* =========================================
-   カード作成
-========================================= */
-
-function createPrefectures(){
-
-  const grid =
-    document.getElementById("prefGrid");
-
-  grid.innerHTML = "";
+let state =
+  JSON.parse(localStorage.getItem(KEY) || "null");
 
 
-  prefectures.forEach(
-    (pref,index)=>{
+if(!state){
 
-      const card =
-        document.createElement("div");
+  state = {
 
-      card.className =
-        "pref " + pref.region;
+    title:"全国47都道府県",
+
+    subtitle:"有名店47選",
+
+    gift:"さつまいもギフト",
+
+    coin:5,
+
+    target:10,
+
+    cards:data.map(x => ({
+
+      pref:x[0],
+
+      shop:x[1],
+
+      count:10,
+
+      done:false
+
+    }))
+
+  };
+
+}
 
 
-      /*
-        番号は完全に削除。
+const $ = id =>
+  document.getElementById(id);
 
-        左：都道府県名
-        中：カウンター
-        右：−＋
-      */
 
-      card.innerHTML = `
+let editing = -1;
 
-        <div class="pref-info">
 
-          <span class="pref-name">
-            ${pref.name}
-          </span>
+/* HTMLエスケープ */
+
+function esc(value){
+
+  return String(value).replace(
+    /[&<>"']/g,
+    function(m){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+
+      }[m];
+
+    }
+  );
+
+}
+
+
+/* 保存 */
+
+function save(){
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(state)
+  );
+
+}
+
+
+/* 表示更新 */
+
+function sync(){
+
+  $("titleView").textContent =
+    state.title;
+
+  $("subtitleView").textContent =
+    state.subtitle;
+
+  $("coinView").textContent =
+    state.coin;
+
+  $("targetView").textContent =
+    state.target;
+
+  $("totalView").textContent =
+    state.coin * state.target;
+
+
+  $("titleInput").value =
+    state.title;
+
+  $("subtitleInput").value =
+    state.subtitle;
+
+  $("giftInput").value =
+    state.gift;
+
+  $("coinInput").value =
+    state.coin;
+
+  $("targetInput").value =
+    state.target;
+
+}
+
+
+/* 47マス表示 */
+
+function render(){
+
+  const board =
+    $("board");
+
+  board.innerHTML = "";
+
+
+  state.cards.forEach(
+    function(card,index){
+
+      const element =
+        document.createElement("article");
+
+
+      element.className =
+        "card" +
+        (card.done ? " done" : "");
+
+
+      element.innerHTML = `
+
+        <div class="num">
+          ${index + 1}
+        </div>
+
+        <div class="pref">
+          ${esc(card.pref)}
+        </div>
+
+        <div class="shop">
+          ${esc(card.shop)}
+        </div>
+
+        <div class="count">
+
+          ${
+            card.done
+            ? "完成"
+            : `あと ${card.count}<small> 個</small>`
+          }
 
         </div>
 
+        <button class="giftBtn">
 
-        <span
-          class="pref-count"
-          id="count-${index}">
-          0
-        </span>
+          ${
+            card.done
+            ? "⭕ 完成"
+            : `🪙 ${state.coin}コインギフト ＋1`
+          }
 
+        </button>
 
-        <div class="pref-buttons">
+        <button class="editBtn">
+          ✏️ 編集
+        </button>
 
-          <button
-            class="pref-btn"
-            onclick="changeCount(${index},-1)">
-            −
-          </button>
-
-          <button
-            class="pref-btn"
-            onclick="changeCount(${index},1)">
-            ＋
-          </button>
-
-        </div>
+        ${
+          card.done
+          ? '<div class="doneMark">⭕</div>'
+          : ''
+        }
 
       `;
 
 
-      grid.appendChild(card);
+      element.querySelector(".giftBtn")
+        .onclick = function(){
 
-    }
-  );
+          gift(index);
 
-}
-
-
-/* =========================================
-   カウント変更
-========================================= */
-
-function changeCount(index,value){
-
-  counts[index] += value;
+        };
 
 
-  if(counts[index] < 0){
+      element.querySelector(".editBtn")
+        .onclick = function(){
 
-    counts[index] = 0;
+          openEditor(index);
 
-  }
-
-
-  update();
-
-}
+        };
 
 
-/* =========================================
-   更新
-========================================= */
-
-function update(){
-
-  let total = 0;
-
-  let completed = 0;
-
-
-  const cards =
-    document.querySelectorAll(".pref");
-
-
-  counts.forEach(
-    (count,index)=>{
-
-      total += count;
-
-
-      const counter =
-        document.getElementById(
-          "count-" + index
-        );
-
-
-      if(counter){
-
-        counter.textContent =
-          count;
-
-      }
-
-
-      const card =
-        cards[index];
-
-
-      if(count > 0){
-
-        card.classList.add("active");
-
-        completed++;
-
-      }
-      else{
-
-        card.classList.remove("active");
-
-      }
+      board.appendChild(element);
 
     }
   );
 
 
-  document.getElementById(
-    "total"
-  ).textContent = total;
+  const completed =
+    state.cards.filter(
+      card => card.done
+    ).length;
 
 
-  document.getElementById(
-    "completed"
-  ).textContent = completed;
+  $("progressText").textContent =
+    completed + " / 47";
 
 
-  document.getElementById(
-    "progress"
-  ).style.width =
-    ((completed / 47) * 100) + "%";
-
-
-  if(
-    completed === 47 &&
-    !completedAlready
-  ){
-
-    completedAlready = true;
-
-
-    document.getElementById(
-      "completeGift"
-    ).textContent =
-      document.getElementById(
-        "giftInput"
-      ).value.trim() ||
-      "指定ギフト";
-
-
-    document.getElementById(
-      "completeModal"
-    ).classList.add("show");
-
-  }
+  $("bar").style.width =
+    completed / 47 * 100 + "%";
 
 }
 
 
-/* =========================================
-   タイトル
-========================================= */
+/* ギフトを受け取ったとき */
 
-function openTitleModal(){
+function gift(index){
 
-  document.getElementById(
-    "titleInput"
-  ).value =
-    document.getElementById(
-      "title"
-    ).textContent.trim();
+  const card =
+    state.cards[index];
 
 
-  document.getElementById(
-    "titleModal"
-  ).classList.add("show");
-
-}
-
-
-function closeTitleModal(){
-
-  document.getElementById(
-    "titleModal"
-  ).classList.remove("show");
-
-}
-
-
-function saveTitle(){
-
-  const value =
-    document.getElementById(
-      "titleInput"
-    ).value.trim();
-
-
-  if(value){
-
-    document.getElementById(
-      "title"
-    ).textContent = value;
-
+  if(card.done){
+    return;
   }
 
 
-  closeTitleModal();
-
-}
-
-
-/* =========================================
-   ギフト名
-========================================= */
-
-function saveGift(){
-
-  const input =
-    document.getElementById(
-      "giftInput"
+  card.count =
+    Math.max(
+      0,
+      card.count - 1
     );
 
 
-  if(!input.value.trim()){
+  if(card.count === 0){
 
-    input.value =
-      "指定ギフト";
+    card.done = true;
 
   }
 
-}
 
+  save();
 
-/* =========================================
-   完成モーダル
-========================================= */
-
-function closeCompleteModal(){
-
-  document.getElementById(
-    "completeModal"
-  ).classList.remove("show");
+  render();
 
 }
 
 
-/* =========================================
-   起動
-========================================= */
+/* 編集画面 */
 
-createPrefectures();
+function openEditor(index){
 
-update();
+  editing = index;
+
+  const card =
+    state.cards[index];
+
+
+  $("prefInput").value =
+    card.pref;
+
+  $("shopInput").value =
+    card.shop;
+
+  $("countInput").value =
+    card.done
+    ? 0
+    : card.count;
+
+
+  $("modal").classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/* 編集画面を閉じる */
+
+function closeModal(){
+
+  $("modal").classList.add(
+    "hidden"
+  );
+
+  editing = -1;
+
+}
+
+
+/* 編集保存 */
+
+$("apply").onclick = function(){
+
+  if(editing < 0){
+    return;
+  }
+
+
+  const card =
+    state.cards[editing];
+
+
+  card.pref =
+    $("prefInput").value.trim()
+    || card.pref;
+
+
+  card.shop =
+    $("shopInput").value.trim()
+    || card.shop;
+
+
+  card.count =
+    Math.max(
+      0,
+      Number(
+        $("countInput").value
+      ) || 0
+    );
+
+
+  card.done =
+    card.count === 0;
+
+
+  save();
+
+  render();
+
+  closeModal();
+
+};
+
+
+$("cancel").onclick =
+  closeModal;
+
+$("close").onclick =
+  closeModal;
+
+
+/* タイトル */
+
+$("titleInput").oninput =
+  function(){
+
+    state.title =
+      this.value;
+
+    $("titleView").textContent =
+      state.title;
+
+    save();
+
+  };
+
+
+/* サブタイトル */
+
+$("subtitleInput").oninput =
+  function(){
+
+    state.subtitle =
+      this.value;
+
+    $("subtitleView").textContent =
+      state.subtitle;
+
+    save();
+
+  };
+
+
+/* ギフト */
+
+$("giftInput").oninput =
+  function(){
+
+    state.gift =
+      this.value;
+
+    save();
+
+  };
+
+
+/* コイン */
+
+$("coinInput").oninput =
+  function(){
+
+    state.coin =
+      Math.max(
+        1,
+        Number(this.value) || 1
+      );
+
+    sync();
+
+    render();
+
+    save();
+
+  };
+
+
+/* 必要ギフト数 */
+
+$("targetInput").oninput =
+  function(){
+
+    state.target =
+      Math.max(
+        1,
+        Number(this.value) || 1
+      );
+
+    sync();
+
+    save();
+
+  };
+
+
+/* 保存 */
+
+$("saveBtn").onclick =
+  function(){
+
+    save();
+
+    this.textContent =
+      "✓ 保存済み";
+
+
+    setTimeout(
+      () => {
+        this.textContent =
+          "💾 保存";
+      },
+      1000
+    );
+
+  };
+
+
+/* 全リセット */
+
+$("resetBtn").onclick =
+  function(){
+
+    if(
+      !confirm(
+        "47マスをリセットしますか？"
+      )
+    ){
+
+      return;
+
+    }
+
+
+    state.cards.forEach(
+      function(card){
+
+        card.count =
+          state.target;
+
+        card.done = false;
+
+      }
+    );
+
+
+    save();
+
+    render();
+
+  };
+
+
+/* 配信モード */
+
+$("modeBtn").onclick =
+  function(){
+
+    document.body.classList.toggle(
+      "live"
+    );
+
+
+    this.textContent =
+      document.body.classList.contains("live")
+      ? "✏️ 編集モード"
+      : "▶ 配信モード";
+
+  };
+
+
+/* 初期表示 */
+
+sync();
+
+render();
 
 </script>
 
