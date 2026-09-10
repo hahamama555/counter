@@ -494,12 +494,12 @@ input{
 
     <label>
       1個のコイン数
-      <input id="coinInput" type="number" min="1">
+      <input id="coinInput" type="number" min="1" value="5">
     </label>
 
     <label>
       必要ギフト数
-      <input id="targetInput" type="number" min="1">
+      <input id="targetInput" type="number" min="1" value="10">
     </label>
 
   </div>
@@ -689,14 +689,17 @@ function save(){
 }
 
 
-/* 表示更新 */
-function sync(){
+/* 表示更新（テキストビューのみ更新） */
+function updateHeaderViews(){
   $("titleView").textContent = state.title;
   $("subtitleView").textContent = state.subtitle;
   $("coinView").textContent = state.coin;
   $("targetView").textContent = state.target;
   $("totalView").textContent = state.coin * state.target;
+}
 
+/* 入力フォームへの初期セット */
+function initInputs(){
   $("titleInput").value = state.title;
   $("subtitleInput").value = state.subtitle;
   $("giftInput").value = state.gift;
@@ -831,7 +834,7 @@ $("close").onclick = closeModal;
 /* タイトル */
 $("titleInput").oninput = function(){
   state.title = this.value;
-  $("titleView").textContent = state.title;
+  updateHeaderViews();
   save();
 };
 
@@ -839,7 +842,7 @@ $("titleInput").oninput = function(){
 /* サブタイトル */
 $("subtitleInput").oninput = function(){
   state.subtitle = this.value;
-  $("subtitleView").textContent = state.subtitle;
+  updateHeaderViews();
   save();
 };
 
@@ -851,21 +854,29 @@ $("giftInput").oninput = function(){
 };
 
 
-/* 1個のコイン数（修正：即時反映と全体レンダリングを実施） */
-$("coinInput").oninput = function(){
-  const val = Number(this.value);
-  state.coin = isNaN(val) || val < 1 ? 1 : val;
-  sync();
+/* 1個のコイン数（確実に即時反映・再描画） */
+function updateCoinValue(valStr) {
+  const num = parseInt(valStr, 10);
+  state.coin = isNaN(num) || num < 1 ? 1 : num;
+  updateHeaderViews();
   render();
   save();
+}
+
+$("coinInput").oninput = function(){
+  updateCoinValue(this.value);
+};
+
+$("coinInput").onchange = function(){
+  updateCoinValue(this.value);
 };
 
 
 /* 必要ギフト数 */
 $("targetInput").oninput = function(){
-  const val = Number(this.value);
-  state.target = isNaN(val) || val < 1 ? 1 : val;
-  sync();
+  const num = parseInt(this.value, 10);
+  state.target = isNaN(num) || num < 1 ? 1 : num;
+  updateHeaderViews();
   save();
 };
 
@@ -945,7 +956,6 @@ function toggleAutoScroll() {
     btn.textContent = "📜 スクローラー: ON";
     btn.classList.add("active");
     if (scrollInterval) clearInterval(scrollInterval);
-    // 16ms間隔でスクロールループ処理を呼び出し
     scrollInterval = setInterval(scrollLoop, 16);
   } else {
     btn.textContent = "📜 スクローラー: OFF";
@@ -961,7 +971,8 @@ $("scrollBtn").onclick = toggleAutoScroll;
 
 
 /* 初期表示 */
-sync();
+initInputs();
+updateHeaderViews();
 render();
 
 </script>
