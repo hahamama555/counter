@@ -623,7 +623,7 @@ const data = [
   ["香川県","山越うどん"],
   ["愛媛県","霧の森菓子工房"],
   ["高知県","明神丸"],
-  ["福岡県","一蘭"],
+  ["福岡県","一欄"],
   ["佐賀県","井手ちゃんぽん"],
   ["長崎県","吉宗"],
   ["熊本県","桂花ラーメン"],
@@ -844,16 +844,17 @@ $("subtitleInput").oninput = function(){
 };
 
 
-/* ギフト */
+/* ギフト名 */
 $("giftInput").oninput = function(){
   state.gift = this.value;
   save();
 };
 
 
-/* コイン */
+/* 1個のコイン数（修正：即時反映と全体レンダリングを実施） */
 $("coinInput").oninput = function(){
-  state.coin = Math.max(1, Number(this.value) || 1);
+  const val = Number(this.value);
+  state.coin = isNaN(val) || val < 1 ? 1 : val;
   sync();
   render();
   save();
@@ -862,13 +863,14 @@ $("coinInput").oninput = function(){
 
 /* 必要ギフト数 */
 $("targetInput").oninput = function(){
-  state.target = Math.max(1, Number(this.value) || 1);
+  const val = Number(this.value);
+  state.target = isNaN(val) || val < 1 ? 1 : val;
   sync();
   save();
 };
 
 
-/* 保存 */
+/* 保存ボタン */
 $("saveBtn").onclick = function(){
   save();
   this.textContent = "✓ 保存済み";
